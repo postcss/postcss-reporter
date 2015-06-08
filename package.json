@@ -1,7 +1,7 @@
 {
-  "name": "postcss-log-warnings",
-  "version": "0.3.1",
-  "description": "Log PostCSS warnings in the console",
+  "name": "postcss-console-log-messages",
+  "version": "0.1.0",
+  "description": "Log PostCSS messages in the console",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidtheclark/postcss-log-warnings.git"
+    "url": "https://github.com/postcss/postcss-console-log-messages.git"
   },
   "author": {
     "name": "David Clark",
@@ -19,9 +19,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/davidtheclark/postcss-log-warnings/issues"
+    "url": "https://github.com/postcss/postcss-console-log-messages/issues"
   },
-  "homepage": "https://github.com/davidtheclark/postcss-log-warnings",
+  "homepage": "https://github.com/postcss/postcss-console-log-messages",
   "devDependencies": {
     "eslint": "0.22.1",
     "lodash": "3.9.3",

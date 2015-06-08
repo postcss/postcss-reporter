@@ -74,14 +74,15 @@ test('clearing warnings from result.messages', function(t) {
 
   t.equal(resultA.warnings().length, 3, 'initial length accurate');
 
-  processResult(resultA);
+  processResult(resultA, { clearWarnings: true });
 
-  t.equal(resultA.warnings().length, 0, 'warnings are cleared');
+  t.equal(resultA.warnings().length, 0,
+    'with `clearWarnings` option, warnings are cleared');
 
-  processResult(resultB, { keepWarnings: true });
+  processResult(resultB);
 
   t.deepEqual(mockSimpleResult.messages, resultB.messages,
-      'keepWarnings option preserves messages exactly');
+    'without `clearWarnings` option, messages are preserved exactly');
 
   t.end();
 });
