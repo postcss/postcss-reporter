@@ -1,17 +1,14 @@
-# postcss-console-log-messages [![Build Status](https://travis-ci.org/postcss/postcss-console-log-messages.svg?branch=master)](https://travis-ci.org/postcss/postcss-console-log-messages)
+# postcss-reporter [![Build Status](https://travis-ci.org/postcss/postcss-reporter.svg?branch=master)](https://travis-ci.org/postcss/postcss-reporter)
 
-Log PostCSS messages in the console.
-
-Currently, only warnings are logged.
+A PostCSS plugin to `console.log()` the messages (warnings, errors, etc.) registered by other PostCSS plugins.
 
 ## Purpose
 
-As of PostCSS 4.1, a single PostCSS process can accumulate warnings from all of the plugins it uses.
-Presumably, plugin authors want you to see those warnings.
-So this plugin exists to read the accumulated warnings (or warnings from only the plugins you've specified), format them for human legibility, and print them to the console.
+As of PostCSS 4.1, a single PostCSS process can accumulate messages from all of the plugins it uses.
+Presumably, plugin authors want you to see those messages.
+So this plugin exists to read the accumulated messages (or messages from only the plugins you've specified), format them, and print them to the console.
 
-In the future, this plugin may log messages of other varieties, not just warnings.
-Currently, it's just warnings.
+By default, the messages are formatted for human legibility. Another formatting function could be passed in as an option.
 
 ## Example Output
 
@@ -20,12 +17,12 @@ Currently, it's just warnings.
 ## Installation
 
 ```
-npm install postcss-console-log-messages
+npm install postcss-reporter
 ```
 
 ## Usage
 
-Add it to your plugin list *after any plugins whose warnings you want to log*, and pass it an object of options.
+Add it to your plugin list *after any plugins whose messages you want to log*, and pass it an object of options.
 
 For example, using [gulp-postcss](https://github.com/w0rm/gulp-postcss):
 
@@ -37,32 +34,32 @@ gulp.task('css', function() {
       customProperties(),
       calc(),
       rejectAllColors(),
-      consoleLogMessages(myOptions) // <------ ding
+      reporter(myOptions) // <------ ding
     ]))
     .pipe(gulp.dest('./dist'));
 });
 ```
 
-You can also use this module as a library:
+You can also use this module's default formatter as a library:
 
 ```js
-var processResult = require('postcss-console-log-messages/lib/processResult');
-var warningLog = processResult(postcssResult, options);
+var defaultFormatter = require('postcss-reporter/lib/defaultFormatter');
+var warningLog = defaultFormatter(postcssResult, options);
 ```
 
 ### Options
 
-- **clearWarnings** (boolean, default = `false`)
+- **clearMessages** (boolean, default = `false`)
 
-  If true, the plugin will clear the result's warnings after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
+  If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
 
 - **plugins** (array of strings, default = `[]`)
 
-  If empty, the plugin will log every warning, regardless of which plugin registered it.
-  To limit output, name the plugins whose warnings you would like to see.
-  For example, `{ plugins: ['postcss-bem-linter'] }` will only log warnings from the `postcss-bem-linter` plugin.
+  If empty, the plugin will log every message, regardless of which plugin registered it.
+  To limit output, name the plugins whose messages you would like to see.
+  For example, `{ plugins: ['postcss-bem-linter'] }` will only log messages from the `postcss-bem-linter` plugin.
 
 - **throwError** (boolean, default = `false`)
 
-  If `true`, after the plugin logs your warnings it will throw an error if it found any warnings.
+  If `true`, after the plugin logs your messages it will throw an error if it found any messages.
   (Not part of the library options.)

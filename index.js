@@ -2,20 +2,41 @@
 
 var postcss = require('postcss');
 var chalk = require('chalk');
-var processResult = require('./lib/processResult');
+var _ = require('lodash');
+var defaultFormatter = require('./lib/defaultFormatter');
+var shouldLogMessage = require('./lib/shouldLogMessage');
 
-module.exports = postcss.plugin('postcss-log-warnings', function(options) {
+module.exports = postcss.plugin('postcss-reporter', function(options) {
   options = options || {};
 
+  var formatter = options.formatter || defaultFormatter;
+
   return function(css, result) {
-    var warningLog = processResult(result, options);
+    var messagesToLog = shouldLogMessage(result, options.plugins);
 
-    if (!warningLog) return;
+    var report = formatter(result, options);
 
-    console.log(warningLog);
+    if (!report) return;
 
-    if (options.throwError) {
-      throw new Error(chalk.red.bold('\n** postcss-log-warnings: warnings were found **'));
+    console.log(report);
+
+    // If user has set `clearMessages` option,
+    // clear all these messages that were just stringified
+    if (options.clearMessages) {
+      result.messages = _.difference(result.message, messagesToLog);
+    }
+
+    if (options.throwError && shouldThrowError()) {
+      throw new Error(chalk.red.bold('\n** postcss-reporter: warnings or errors were found **'));
+    }
+
+    function shouldThrowError() {
+      return (
+        messagesToLog.length
+        && messagesToLog.some(function(message) {
+          return message.type === 'warning' || message.type === 'error';
+        })
+      );
     }
   };
 });
