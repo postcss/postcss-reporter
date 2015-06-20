@@ -1,90 +1,53 @@
-'use strict';
-
 var test = require('tape');
-var defaultFormatter = require('../lib/defaultFormatter');
+var defaultFormatter = require('../lib/defaultFormatter')();
 var chalk = require('chalk');
-var _ = require('lodash');
 var path = require('path');
 
-var mockSimpleResult = {
-  messages: [{
+var basicMessages = [
+  {
     type: 'warning',
     plugin: 'foo',
-    text: 'foo warning'
-  }, {
+    text: 'foo warning',
+  },
+  {
     type: 'warning',
     plugin: 'bar',
-    text: 'bar warning'
-  }, {
+    text: 'bar warning',
+  },
+  {
     type: 'warning',
     plugin: 'baz',
-    text: 'baz warning'
-  }, {
+    text: 'baz warning',
+  },
+  {
     type: 'error',
     plugin: 'baz',
-    text: 'baz error'
-  }],
-  root: {
-    source: {
-      input: {
-        from: '<input css 1>'
-      }
-    }
-  }
-};
+    text: 'baz error',
+  },
+];
 
-var simpleOutput = '\n# postcss-reporter\n' +
+var basicOutput = '\n# postcss-reporter\n' +
   '\n<input css 1>' +
   '\n! foo warning [foo]' +
   '\n! bar warning [bar]' +
   '\n! baz warning [baz]' +
   '\nx baz error [baz]\n';
 
-var simpleOutputNoBar = '\n# postcss-reporter\n' +
-  '\n<input css 1>' +
-  '\n! foo warning [foo]' +
-  '\n! baz warning [baz]' +
-  '\nx baz error [baz]\n';
-
-test('defaultFormatter with simple mock', function(t) {
+test('defaultFormatter with simple mock messages', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter(_.cloneDeep(mockSimpleResult))),
-    simpleOutput,
+    chalk.stripColor(defaultFormatter({
+      messages: basicMessages,
+      source: '<input css 1>',
+    })),
+    basicOutput,
     'basic'
   );
 
-  t.equal(
-    chalk.stripColor(
-      defaultFormatter(_.cloneDeep(mockSimpleResult), { plugins: ['foo', 'baz']})
-    ),
-    simpleOutputNoBar,
-    'excluding bar'
-  );
-
   t.end();
 });
 
-test('clearing messages from result', function(t) {
-  var resultA = _.cloneDeep(mockSimpleResult);
-  var resultB = _.cloneDeep(mockSimpleResult);
-
-  t.equal(resultA.messages.length, 4, 'initial length accurate');
-
-  defaultFormatter(resultA, { clearMessages: true });
-
-  t.equal(resultA.messages.length, 0,
-    'with `clearMessages` option, messages are cleared');
-
-  defaultFormatter(resultB);
-
-  t.deepEqual(mockSimpleResult.messages, resultB.messages,
-    'without `clearMessages` option, messages are preserved exactly');
-
-  t.end();
-});
-
-var mockComplexResult = {
-  messages: [{
+var complexMessages = [
+  {
     type: 'warning',
     plugin: 'foo',
     text: 'foo warning',
@@ -92,10 +55,10 @@ var mockComplexResult = {
       source: {
         start: {
           line: 3,
-          column: 5
-        }
-      }
-    }
+          column: 5,
+        },
+      },
+    },
   }, {
     type: 'warning',
     plugin: 'bar',
@@ -104,23 +67,16 @@ var mockComplexResult = {
       source: {
         start: {
           line: 1,
-          column: 99
-        }
-      }
-    }
+          column: 99,
+        },
+      },
+    },
   }, {
     type: 'error',
     plugin: 'baz',
-    text: 'baz error'
-  }],
-  root: {
-    source: {
-      input: {
-        from: path.resolve(process.cwd(), 'style/rainbows/horses.css')
-      }
-    }
-  }
-};
+    text: 'baz error',
+  },
+];
 
 var complexOutput = '\n# postcss-reporter\n' +
   '\nstyle/rainbows/horses.css' +
@@ -128,56 +84,43 @@ var complexOutput = '\n# postcss-reporter\n' +
   '\n1:99\t! bar warning [bar]' +
   '\nx baz error [baz]\n';
 
-var complexOutputNoBar = '\n# postcss-reporter\n' +
-  '\nstyle/rainbows/horses.css' +
-  '\n3:5\t! foo warning\n';
-
-
 test('defaultFormatter with complex mock', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter(_.cloneDeep(mockComplexResult))),
+    chalk.stripColor(defaultFormatter({
+      messages: complexMessages,
+      source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
+    })),
     complexOutput,
-    'basic'
-  );
-
-  t.equal(
-    chalk.stripColor(defaultFormatter(_.cloneDeep(mockComplexResult), { plugins: ['foo'] })),
-    complexOutputNoBar,
-    'excluding bar'
+    'complex'
   );
 
   t.end();
 });
 
-var mockMessagesOnRootResult = {
-  messages: [{
+var onRootMessages = [
+  {
     type: 'warning',
     text: 'blergh',
     node: {
       type: 'root',
       // warnings on root do not have start position
-      source: {}
+      source: {},
     },
-    plugin: 'reject-root'
-  }],
-  root: {
-    source: {
-      input: {
-        from: '<input css 1>'
-      }
-    }
-  }
-};
+    plugin: 'reject-root',
+  },
+];
 
-var messagesOnRootResultOutput = '\n# postcss-reporter\n' +
+var onRootResult = '\n# postcss-reporter\n' +
   '\n<input css 1>' +
   '\n! blergh [reject-root]\n';
 
 test('defaultFormatter with mocked warning on root', function(t) {
-  console.log(chalk.stripColor(defaultFormatter(_.cloneDeep(mockMessagesOnRootResult))));
   t.equal(
-    chalk.stripColor(defaultFormatter(_.cloneDeep(mockMessagesOnRootResult))),
-    messagesOnRootResultOutput
+    chalk.stripColor(defaultFormatter({
+      messages: onRootMessages,
+      source: '<input css 1>',
+    })),
+    onRootResult
   );
   t.end();
 });

@@ -40,11 +40,14 @@ gulp.task('css', function() {
 });
 ```
 
-You can also use this module's default formatter as a library:
+You can also use this module's default formatter as a library.
 
 ```js
-var defaultFormatter = require('postcss-reporter/lib/defaultFormatter');
-var warningLog = defaultFormatter(postcssResult, options);
+var defaultFormatter = require('postcss-reporter/lib/defaultFormatter')();
+var warningLog = defaultFormatter({
+  messages: someMessages,
+  source: someSource
+});
 ```
 
 ### Options
@@ -52,6 +55,12 @@ var warningLog = defaultFormatter(postcssResult, options);
 - **clearMessages** (boolean, default = `false`)
 
   If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
+
+- **formatter** (function)
+
+  By default, this reporter will use its default formatter which is made for human legibility in the console. To use another formatter, pass a function that
+    - accepts an object containing a `messages` array and a `source` string
+    - returns a the string to report
 
 - **plugins** (array of strings, default = `[]`)
 

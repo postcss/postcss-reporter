@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/postcss/postcss-reporter",
   "devDependencies": {
-    "eslint": "0.22.1",
+    "eslint": "0.23.0",
     "lodash": "3.9.3",
+    "postcss-bem-linter": "0.3.0",
     "tape": "4.0.0"
   },
   "dependencies": {
