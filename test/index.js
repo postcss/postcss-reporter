@@ -1,1 +1,2 @@
 require('./defaultFormatter');
+require('./reporter');

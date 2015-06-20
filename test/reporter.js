@@ -1,5 +1,5 @@
 var test = require('tape');
-var _ = require('lodash');
+var cloneDeep = require('lodash.clonedeep');
 var reporter = require('../lib/reporter');
 
 var mockSimpleResult = {
@@ -74,7 +74,7 @@ test('reporter with simple mock result and specified plugin', function(t) {
 });
 
 test('reporter with simple mock result and clearMessages', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -86,7 +86,7 @@ test('reporter with simple mock result and clearMessages', function(t) {
 });
 
 test('reporter with simple mock result, specified plugins, and clearMessages', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -108,7 +108,7 @@ test('reporter with simple mock result, specified plugins, and clearMessages', f
 });
 
 test('reporter with simple mock result and throwError', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),

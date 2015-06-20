@@ -24,13 +24,13 @@
   "homepage": "https://github.com/postcss/postcss-reporter",
   "devDependencies": {
     "eslint": "0.23.0",
-    "lodash": "3.9.3",
+    "lodash.clonedeep": "3.0.1",
     "postcss-bem-linter": "0.3.0",
     "tape": "4.0.0"
   },
   "dependencies": {
     "chalk": "^1.0.0",
-    "lodash": "^3.9.3",
+    "lodash.difference": "^3.2.1",
     "postcss": "^4.1.0"
   }
 }
