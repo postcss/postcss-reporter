@@ -28,10 +28,10 @@ var basicMessages = [
 
 var basicOutput = '\n# postcss-reporter\n' +
   '\n<input css 1>' +
-  '\n! foo warning [foo]' +
-  '\n! bar warning [bar]' +
-  '\n! baz warning [baz]' +
-  '\nx baz error [baz]\n';
+  '\n>> foo warning [foo]' +
+  '\n>> bar warning [bar]' +
+  '\n>> baz warning [baz]' +
+  '\nbaz error [baz]\n';
 
 test('defaultFormatter with simple mock messages', function(t) {
   t.equal(
@@ -80,9 +80,9 @@ var complexMessages = [
 
 var complexOutput = '\n# postcss-reporter\n' +
   '\nstyle/rainbows/horses.css' +
-  '\n3:5\t! foo warning [foo]' +
-  '\n1:99\t! bar warning [bar]' +
-  '\nx baz error [baz]\n';
+  '\n3:5\t>> foo warning [foo]' +
+  '\n1:99\t>> bar warning [bar]' +
+  '\nbaz error [baz]\n';
 
 test('defaultFormatter with complex mock', function(t) {
   t.equal(
@@ -112,7 +112,7 @@ var onRootMessages = [
 
 var onRootResult = '\n# postcss-reporter\n' +
   '\n<input css 1>' +
-  '\n! blergh [reject-root]\n';
+  '\n>> blergh [reject-root]\n';
 
 test('defaultFormatter with mocked warning on root', function(t) {
   t.equal(
