@@ -1,7 +1,10 @@
 var test = require('tape');
 var defaultFormatter = require('../lib/defaultFormatter')();
 var chalk = require('chalk');
+var symbols = require('log-symbols');
 var path = require('path');
+
+var colorlessWarning = chalk.stripColor(symbols.warning);
 
 var basicMessages = [
   {
@@ -26,11 +29,10 @@ var basicMessages = [
   },
 ];
 
-var basicOutput = '\n# postcss-reporter\n' +
-  '\n<input css 1>' +
-  '\n>> foo warning [foo]' +
-  '\n>> bar warning [bar]' +
-  '\n>> baz warning [baz]' +
+var basicOutput = '\n<input css 1>' +
+  '\n' + colorlessWarning + '  foo warning [foo]' +
+  '\n' + colorlessWarning + '  bar warning [bar]' +
+  '\n' + colorlessWarning + '  baz warning [baz]' +
   '\nbaz error [baz]\n';
 
 test('defaultFormatter with simple mock messages', function(t) {
@@ -78,10 +80,9 @@ var complexMessages = [
   },
 ];
 
-var complexOutput = '\n# postcss-reporter\n' +
-  '\nstyle/rainbows/horses.css' +
-  '\n3:5\t>> foo warning [foo]' +
-  '\n1:99\t>> bar warning [bar]' +
+var complexOutput = '\nstyle/rainbows/horses.css' +
+  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
+  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\nbaz error [baz]\n';
 
 test('defaultFormatter with complex mock', function(t) {
@@ -110,9 +111,8 @@ var onRootMessages = [
   },
 ];
 
-var onRootResult = '\n# postcss-reporter\n' +
-  '\n<input css 1>' +
-  '\n>> blergh [reject-root]\n';
+var onRootResult = '\n<input css 1>' +
+  '\n' + colorlessWarning + '  blergh [reject-root]\n';
 
 test('defaultFormatter with mocked warning on root', function(t) {
   t.equal(
