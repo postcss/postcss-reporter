@@ -1,8 +1,10 @@
 var test = require('tape');
-var defaultFormatter = require('../lib/defaultFormatter')();
+var formatter = require('../lib/formatter');
 var chalk = require('chalk');
 var symbols = require('log-symbols');
 var path = require('path');
+
+var defaultFormatter = formatter();
 
 var colorlessWarning = chalk.stripColor(symbols.warning);
 
@@ -33,7 +35,8 @@ var basicOutput = '\n<input css 1>' +
   '\n' + colorlessWarning + '  foo warning [foo]' +
   '\n' + colorlessWarning + '  bar warning [bar]' +
   '\n' + colorlessWarning + '  baz warning [baz]' +
-  '\nbaz error [baz]\n';
+  '\nbaz error [baz]' +
+  '\n';
 
 test('defaultFormatter with simple mock messages', function(t) {
   t.equal(
@@ -62,6 +65,10 @@ var complexMessages = [
       },
     },
   }, {
+    type: 'error',
+    plugin: 'baz',
+    text: 'baz error',
+  }, {
     type: 'warning',
     plugin: 'bar',
     text: 'bar warning',
@@ -74,16 +81,33 @@ var complexMessages = [
       },
     },
   }, {
-    type: 'error',
-    plugin: 'baz',
-    text: 'baz error',
+    type: 'warning',
+    plugin: 'foo',
+    text: 'ha warning',
+    node: {
+      source: {
+        start: {
+          line: 8,
+          column: 13,
+        },
+      },
+    },
   },
 ];
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
-  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
-  '\nbaz error [baz]\n';
+  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
+  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\nbaz error [baz]' +
+  '\n';
+
+var unsortedComplexOutput = '\nstyle/rainbows/horses.css' +
+  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
+  '\nbaz error [baz]' +
+  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
+  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n';
 
 test('defaultFormatter with complex mock', function(t) {
   t.equal(
@@ -93,6 +117,17 @@ test('defaultFormatter with complex mock', function(t) {
     })),
     complexOutput,
     'complex'
+  );
+
+  var unsortedFormatter = formatter({ sortByPosition: false });
+
+  t.equal(
+    chalk.stripColor(unsortedFormatter({
+      messages: complexMessages,
+      source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
+    })),
+    unsortedComplexOutput,
+    'unsorted complex'
   );
 
   t.end();
