@@ -41,13 +41,13 @@ gulp.task('css', function() {
 });
 ```
 
-### Options
+## Options
 
-#### clearMessages (boolean, default = `false`)
+**clearMessages** (boolean, default = `false`)
 
 If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
 
-#### formatter (function, default = the default formatter)
+**formatter** (function, default = the default formatter)
 
 By default, this reporter will format the messages for human legibility in the console.
 To use another formatter, pass a function that
@@ -65,25 +65,25 @@ reporter({
 })
 ```
 
-#### plugins (array of strings, default = `[]`)
+**plugins** (array of strings, default = `[]`)
 
 If empty, the plugin will log every message, regardless of which plugin registered it.
 To limit output, name the plugins whose messages you would like to see.
 For example, `{ plugins: ['postcss-bem-linter'] }` will only log messages from the `postcss-bem-linter` plugin.
 
-#### throwError (boolean, default = `false`)
+**throwError** (boolean, default = `false`)
 
 If `true`, after the plugin logs your messages it will throw an error if it found any warnings.
 
-#### sortByPosition (boolean, default = `true`)
+**sortByPosition** (boolean, default = `true`)
 
 If `false`, messages will not be sorted by line/column position.
 
-### How to get output without colors
+## How to get output without colors
 
 If you would like no colors in the console output, simply pass `--no-colors` when you invoke whatever command runs this plugin. (This works because of [chalk](https://github.com/sindresorhus/chalk).)
 
-### Standalone formatter
+## Standalone formatter
 
 You can also use this module's formatter as a library, with following API:
 
