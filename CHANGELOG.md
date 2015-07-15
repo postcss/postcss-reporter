@@ -1,5 +1,8 @@
 # Changelog
 
+### v0.3.1
+- Remove leftover debugging log statement.
+
 ### v0.3.0
 - Add `sortByPosition` option (to both the reporter and the formatter), with default value `true`.
 
