@@ -8,6 +8,10 @@
     "test": "npm run lint && tape test",
     "visual": "node test/visual.js"
   },
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/postcss/postcss-reporter.git"
