@@ -1,9 +1,12 @@
 # Changelog
 
-### v0.3.1
+## Head
+- Cleaner npm install (files specified in `package.json`).
+
+## v0.3.1
 - Remove leftover debugging log statement.
 
-### v0.3.0
+## v0.3.0
 - Add `sortByPosition` option (to both the reporter and the formatter), with default value `true`.
 
 ## v0.2.0
