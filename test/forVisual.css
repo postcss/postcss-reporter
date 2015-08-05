@@ -1,10 +1,9 @@
-/** @define HamSandwich */
-
-.Ham.Sandwich {
-  background: orange;
-  color: pink;
+.baz {
+  top:0px;
 }
-
-:root a {
-  --Foo: 0;
+.foo {
+  background: orange;
+}
+.bar {
+  color:pink;
 }

@@ -79,6 +79,12 @@ If `true`, after the plugin logs your messages it will throw an error if it foun
 
 If `false`, messages will not be sorted by line/column position.
 
+**positionless** (`"first"|"last"|"any"`, default = `"first"`)
+
+By default, messages without line/column positions will be grouped at the beginning of the output.
+To put them at the end, instead, use `"last"`.
+To not bother sorting these, use `"any"`.
+
 ## How to get output without colors
 
 If you would like no colors in the console output, simply pass `--no-colors` when you invoke whatever command runs this plugin. (This works because of [chalk](https://github.com/sindresorhus/chalk).)

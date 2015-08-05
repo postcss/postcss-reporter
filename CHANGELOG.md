@@ -1,6 +1,7 @@
 # Changelog
 
 ## Head
+- Add `positionless` option (to both the reporter and the formatter), with default value `"first"`.
 - Cleaner npm install (files specified in `package.json`).
 
 ## v0.3.1

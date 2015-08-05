@@ -96,13 +96,27 @@ var complexMessages = [
 ];
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
+  '\nbaz error [baz]' +
+  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
+  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
+  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n';
+
+var noPositionSortOutput = '\nstyle/rainbows/horses.css' +
+  '\nbaz error [baz]' +
+  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
+  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
+  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n';
+
+var positionlessLastOutput = '\nstyle/rainbows/horses.css' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
   '\nbaz error [baz]' +
   '\n';
 
-var unsortedComplexOutput = '\nstyle/rainbows/horses.css' +
+var noSortOutput = '\nstyle/rainbows/horses.css' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\nbaz error [baz]' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
@@ -119,14 +133,34 @@ test('defaultFormatter with complex mock', function(t) {
     'complex'
   );
 
-  var unsortedFormatter = formatter({ sortByPosition: false });
+  var noPositionSortFormatter = formatter({ sortByPosition: false });
 
   t.equal(
-    chalk.stripColor(unsortedFormatter({
+    chalk.stripColor(noPositionSortFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
     })),
-    unsortedComplexOutput,
+    noPositionSortOutput,
+    '`sortByPosition: false` complex'
+  );
+
+  var positionlessLastFormatter = formatter({ positionless: 'last' });
+  t.equal(
+    chalk.stripColor(positionlessLastFormatter({
+      messages: complexMessages,
+      source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
+    })),
+    positionlessLastOutput,
+    '`positionless: last` complex'
+  );
+
+  var noSortFormatter = formatter({ sortByPosition: false, positionless: 'any' });
+  t.equal(
+    chalk.stripColor(noSortFormatter({
+      messages: complexMessages,
+      source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
+    })),
+    noSortOutput,
     'unsorted complex'
   );
 
