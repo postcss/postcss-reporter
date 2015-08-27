@@ -1,6 +1,6 @@
 {
   "name": "postcss-reporter",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Log PostCSS messages in the console",
   "main": "index.js",
   "scripts": {
@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/postcss/postcss-reporter",
   "devDependencies": {
-    "eslint": "1.0.0",
+    "eslint": "1.2.1",
     "lodash.clonedeep": "3.0.2",
-    "stylelint": "0.6.2",
-    "tape": "4.0.2"
+    "stylelint": "0.7.0",
+    "tape": "4.2.0"
   },
   "dependencies": {
     "chalk": "^1.0.0",

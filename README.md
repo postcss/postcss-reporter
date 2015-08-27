@@ -21,6 +21,8 @@ By default, the messages are formatted for human legibility and sorted according
 npm install postcss-reporter
 ```
 
+Version 1.0.0+ is compatible with PostCSS 5+. (Earlier versions are compatible with PostCSS 4.)
+
 ## Usage
 
 Add it to your plugin list *after any plugins whose messages you want to log*, and optionally pass it an object of options.
