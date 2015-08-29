@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+- Use PostCSS 5's line/column properties on warnings, instead of relying on the source node.
+
 ## 1.0.0
 - Upgrade to PostCSS 5.
 
