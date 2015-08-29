@@ -56,14 +56,8 @@ var complexMessages = [
     type: 'warning',
     plugin: 'foo',
     text: 'foo warning',
-    node: {
-      source: {
-        start: {
-          line: 3,
-          column: 5,
-        },
-      },
-    },
+    line: 3,
+    column: 5,
   }, {
     type: 'error',
     plugin: 'baz',
@@ -72,26 +66,14 @@ var complexMessages = [
     type: 'warning',
     plugin: 'bar',
     text: 'bar warning',
-    node: {
-      source: {
-        start: {
-          line: 1,
-          column: 99,
-        },
-      },
-    },
+    line: 1,
+    column: 99,
   }, {
     type: 'warning',
     plugin: 'foo',
     text: 'ha warning',
-    node: {
-      source: {
-        start: {
-          line: 8,
-          column: 13,
-        },
-      },
-    },
+    line: 8,
+    column: 13,
   },
 ];
 
