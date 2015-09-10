@@ -28,7 +28,7 @@ var mockSimpleResult = {
   root: {
     source: {
       input: {
-        from: '<input css 1>',
+        id: '<input css 1>',
       },
     },
   },
@@ -127,3 +127,51 @@ function mockFormatter(tracker) {
     return 'bogus report';
   };
 }
+
+var mockResultFromFile = {
+  messages: [
+    {
+      type: 'error',
+      plugin: 'baz',
+      text: 'baz error',
+    },
+  ],
+  root: {
+    source: {
+      input: {
+        file: '/path/to/file.css',
+      },
+    },
+  },
+};
+
+test('reporter with mock containing file source', function(t) {
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+  });
+  testReporter(null, mockResultFromFile);
+  t.equal(tracker.source, '/path/to/file.css');
+  t.end();
+})
+
+var mockResultNoSource = {
+  messages: [
+    {
+      type: 'error',
+      plugin: 'baz',
+      text: 'baz error',
+    },
+  ],
+  root: {},
+};
+
+test('reporter with mock containing no source', function(t) {
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+  });
+  testReporter(null, mockResultNoSource);
+  t.equal(tracker.source, undefined);
+  t.end();
+})

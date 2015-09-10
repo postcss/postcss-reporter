@@ -200,3 +200,24 @@ test('defaultFormatter with mocked warning on root', function(t) {
   );
   t.end();
 });
+
+var oneMessage = [
+  {
+    type: 'warning',
+    plugin: 'foo',
+    text: 'foo warning',
+  },
+];
+
+var oneMessageResult = '\n' + colorlessWarning + '  foo warning [foo]\n';
+
+test('defaultFormatter with undefined source', function(t) {
+  t.equal(
+    chalk.stripColor(defaultFormatter({
+      messages: oneMessage,
+      source: undefined,
+    })),
+    oneMessageResult
+  );
+  t.end();
+});
