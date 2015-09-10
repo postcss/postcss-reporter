@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+- Handle variable and absent input sources.
+
 ## 1.2.0
 - Add `noIcon` and `noPlugin` options to both reporter and formatter.
 

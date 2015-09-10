@@ -1,6 +1,6 @@
 {
   "name": "postcss-reporter",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Log PostCSS messages in the console",
   "main": "index.js",
   "scripts": {
