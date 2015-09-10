@@ -38,6 +38,13 @@ var basicOutput = '\n<input css 1>' +
   '\nbaz error [baz]' +
   '\n';
 
+var basicOutputMinimal = '\n<input css 1>' +
+  '\nfoo warning' +
+  '\nbar warning' +
+  '\nbaz warning' +
+  '\nbaz error' +
+  '\n';
+
 test('defaultFormatter with simple mock messages', function(t) {
   t.equal(
     chalk.stripColor(defaultFormatter({
@@ -45,6 +52,24 @@ test('defaultFormatter with simple mock messages', function(t) {
       source: '<input css 1>',
     })),
     basicOutput,
+    'basic'
+  );
+
+  t.end();
+});
+
+test('defaultFormatter with noIcon and noPlugin and simple mock messages', function(t) {
+  var minimalFormatter = formatter({
+    noIcon: true,
+    noPlugin: true,
+  });
+
+  t.equal(
+    chalk.stripColor(minimalFormatter({
+      messages: basicMessages,
+      source: '<input css 1>',
+    })),
+    basicOutputMinimal,
     'basic'
   );
 

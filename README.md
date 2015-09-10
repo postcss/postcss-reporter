@@ -87,6 +87,14 @@ By default, messages without line/column positions will be grouped at the beginn
 To put them at the end, instead, use `"last"`.
 To not bother sorting these, use `"any"`.
 
+**noIcon** (boolean, default = `false`)
+
+If `true`, no exclamatory triangle icons will be printed next to warnings.
+
+**noPlugin** (boolean, default = `false`)
+
+If `true`, plugin names will not be printed in brackets after messages.
+
 ## How to get output without colors
 
 If you would like no colors in the console output, simply pass `--no-colors` when you invoke whatever command runs this plugin. (This works because of [chalk](https://github.com/sindresorhus/chalk).)
@@ -109,3 +117,5 @@ console.log(warningLog);
 These are the formatter's options:
 
 - sortByPosition (boolean, default = `true`)
+- noIcon (boolean, default = `false`) - Do not print any warning exclamatory triangle icons
+- noPlugin (boolean, default = `false`) - Do not print plugin names

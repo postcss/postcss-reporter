@@ -6,6 +6,8 @@ var fs = require('fs');
 var reporterOptions = {
   // positionless: 'last',
   // sortByPosition: true,
+  noIcon: true,
+  noPlugin: true,
 };
 
 fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {

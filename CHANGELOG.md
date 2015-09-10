@@ -1,5 +1,8 @@
 # Changelog
 
+## Head
+- Add `noIcon` and `noPlugin` options to both reporter and formatter.
+
 ## 1.1.0
 - Use PostCSS 5's line/column properties on warnings, instead of relying on the source node.
 
