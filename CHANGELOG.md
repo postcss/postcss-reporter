@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.2.0
 - Add `noIcon` and `noPlugin` options to both reporter and formatter.
 
 ## 1.1.0
