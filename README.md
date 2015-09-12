@@ -55,7 +55,7 @@ By default, this reporter will format the messages for human legibility in the c
 To use another formatter, pass a function that
 
   - accepts an object containing a `messages` array and a `source` string
-  - returns a the string to report
+  - returns the string to report
 
 For example, you could write a formatter like this:
 
