@@ -1,5 +1,8 @@
 # Changelog
 
+## Head
+- Output empty string from `formatter` if there are no messages, instead of `undefined`.
+
 ## 1.2.1
 - Handle variable and absent input sources.
 

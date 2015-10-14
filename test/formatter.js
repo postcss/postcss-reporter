@@ -221,3 +221,11 @@ test('defaultFormatter with undefined source', function(t) {
   );
   t.end();
 });
+
+test('defaultFormatter with no messages', function(t) {
+  t.equal(
+    chalk.stripColor(defaultFormatter({ messages: [] })),
+    ''
+  );
+  t.end();
+});
