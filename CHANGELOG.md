@@ -1,6 +1,8 @@
 # Changelog
 
 ## Head
+- Check individual messages for distinct sources, then group messages by those sources,
+  instead of always using the PostCSS Result's source.
 - Output empty string from `formatter` if there are no messages, instead of `undefined`.
 
 ## 1.2.1
