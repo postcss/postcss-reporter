@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1
+- Fix Windows path bug.
+
 ## 1.3.0
 - Check individual messages for distinct sources, then group messages by those sources,
   instead of always using the PostCSS Result's source.
