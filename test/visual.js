@@ -2,6 +2,7 @@ var postcss = require('postcss');
 var stylelint = require('stylelint');
 var reporter = require('..');
 var fs = require('fs');
+var sourceMap = require('source-map');
 
 var reporterOptions = {
   // positionless: 'last',
@@ -12,6 +13,12 @@ var reporterOptions = {
 
 fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
   if (err) throw err;
+
+  var processOptions = {
+    from: 'test/forVisual.css',
+    map: { prev: createSourceMap() },
+  }
+
   postcss()
     .use(stylelint({
       rules: {
@@ -22,7 +29,7 @@ fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
       },
     }))
     .use(reporter(reporterOptions))
-    .process(data, { from: 'test/forVisual.css' })
+    .process(data, processOptions)
     .then(function() {
       console.log('There\'s your visual confirmation that it works.');
     })
@@ -30,3 +37,13 @@ fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
       console.log(error.stack);
     });
 });
+
+function createSourceMap() {
+  var map = new sourceMap.SourceMapGenerator({ file: 'forVisual.css' });
+  map.addMapping({
+    generated: { line: 2, column: 7 },
+    source: 'forVisual.original.css',
+    original: { line: 102, column: 107 },
+  });
+  return map;
+}

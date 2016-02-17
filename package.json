@@ -28,6 +28,7 @@
   "homepage": "https://github.com/postcss/postcss-reporter",
   "devDependencies": {
     "eslint": "1.3.1",
+    "source-map": "0.5.3",
     "stylelint": "1.0.1",
     "tape": "4.2.0"
   },

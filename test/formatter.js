@@ -3,6 +3,8 @@ var formatter = require('../lib/formatter');
 var chalk = require('chalk');
 var symbols = require('log-symbols');
 var path = require('path');
+var sourceMap = require('source-map');
+var postcss = require('postcss');
 
 var defaultFormatter = formatter();
 
@@ -226,6 +228,28 @@ test('defaultFormatter with no messages', function(t) {
   t.equal(
     chalk.stripColor(defaultFormatter({ messages: [] })),
     ''
+  );
+  t.end();
+});
+
+test('defaultFormatter with real sourcemaps', function(t) {
+  var map = new sourceMap.SourceMapGenerator({ file: 'file.css' });
+  map.addMapping({
+    generated: { line: 2, column: 7 },
+    source: 'file.original.css',
+    original: { line: 102, column: 107 },
+  });
+
+  var root = postcss.parse('.button { color: red; }', {
+    from: 'file.css',
+    map: { prev: map },
+  });
+
+  var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo' };
+
+  t.equal(
+    chalk.stripColor(defaultFormatter({ messages: [message] })),
+    '\n102:107\tblargh [foo]\n'
   );
   t.end();
 });
