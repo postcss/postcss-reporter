@@ -11,11 +11,11 @@ var reporterOptions = {
   noPlugin: true,
 };
 
-fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
+fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, data) {
   if (err) throw err;
 
   var processOptions = {
-    from: 'test/forVisual.css',
+    from: 'test/fixtures/forVisual.css',
     map: { prev: createSourceMap() },
   }
 
