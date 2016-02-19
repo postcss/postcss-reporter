@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.2
+- Find more accurate positions of preprocessed files with sourcemaps.
+
 ## 1.3.1
 - Fix Windows path bug.
 
