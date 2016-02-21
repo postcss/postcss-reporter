@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.3.3
 - Fix regression that caused positions from sources without incoming sourcemaps not to be logged.
 
 ## 1.3.2
