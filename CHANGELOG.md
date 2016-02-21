@@ -1,5 +1,8 @@
 # Changelog
 
+## Head
+- Fix regression that caused positions from sources without incoming sourcemaps not to be logged.
+
 ## 1.3.2
 - Find more accurate positions of preprocessed files with sourcemaps.
 
