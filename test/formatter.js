@@ -245,11 +245,11 @@ test('defaultFormatter with real sourcemaps', function(t) {
     map: { prev: map },
   });
 
-  var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo', type: 'error' };
+  var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo' };
 
   t.equal(
     chalk.stripColor(defaultFormatter({ messages: [message] }).output),
-    '\n  102:107   ' + colorlessError + '  blargh  foo\n'
+    '\n  102:107   ' + colorlessWarning + '  blargh  foo\n'
   );
   t.end();
 });
