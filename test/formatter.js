@@ -9,6 +9,7 @@ var postcss = require('postcss');
 var defaultFormatter = formatter();
 
 var colorlessWarning = chalk.stripColor(symbols.warning);
+var colorlessError = chalk.stripColor(symbols.error);
 
 var basicMessages = [
   {
@@ -34,17 +35,10 @@ var basicMessages = [
 ];
 
 var basicOutput = '\n<input css 1>' +
-  '\n' + colorlessWarning + '  foo warning [foo]' +
-  '\n' + colorlessWarning + '  bar warning [bar]' +
-  '\n' + colorlessWarning + '  baz warning [baz]' +
-  '\nbaz error [baz]' +
-  '\n';
-
-var basicOutputMinimal = '\n<input css 1>' +
-  '\nfoo warning' +
-  '\nbar warning' +
-  '\nbaz warning' +
-  '\nbaz error' +
+  '\n      ' + colorlessWarning + '  foo warning  foo' +
+  '\n      ' + colorlessWarning + '  bar warning  bar' +
+  '\n      ' + colorlessWarning + '  baz warning  baz' +
+  '\n      ' + colorlessError +   '  baz error    baz' +
   '\n';
 
 test('defaultFormatter with simple mock messages', function(t) {
@@ -52,13 +46,20 @@ test('defaultFormatter with simple mock messages', function(t) {
     chalk.stripColor(defaultFormatter({
       messages: basicMessages,
       source: '<input css 1>',
-    })),
+    }).output),
     basicOutput,
     'basic'
   );
 
   t.end();
 });
+
+var basicOutputMinimal = '\n<input css 1>' +
+  '\n      warning  foo warning' +
+  '\n      warning  bar warning' +
+  '\n      warning  baz warning' +
+  '\n      error    baz error' +
+  '\n';
 
 test('defaultFormatter with noIcon and noPlugin and simple mock messages', function(t) {
   var minimalFormatter = formatter({
@@ -70,7 +71,7 @@ test('defaultFormatter with noIcon and noPlugin and simple mock messages', funct
     chalk.stripColor(minimalFormatter({
       messages: basicMessages,
       source: '<input css 1>',
-    })),
+    }).output),
     basicOutputMinimal,
     'basic'
   );
@@ -105,31 +106,31 @@ var complexMessages = [
 ];
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
-  '\nbaz error [baz]' +
-  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
-  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
-  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n         ' + colorlessError +   '  baz error    baz' +
+  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
+  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
+  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 var noPositionSortOutput = '\nstyle/rainbows/horses.css' +
-  '\nbaz error [baz]' +
-  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
-  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
-  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n         ' + colorlessError +   '  baz error    baz' +
+  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
+  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
+  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 var positionlessLastOutput = '\nstyle/rainbows/horses.css' +
-  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
-  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
-  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
-  '\nbaz error [baz]' +
+  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
+  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
+  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
+  '\n         ' + colorlessError +   '  baz error    baz' +
   '\n';
 
 var noSortOutput = '\nstyle/rainbows/horses.css' +
-  '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
-  '\nbaz error [baz]' +
-  '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
-  '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
+  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
+  '\n         ' + colorlessError +   '  baz error    baz' +
+  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
+  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 test('defaultFormatter with complex mock', function(t) {
@@ -137,7 +138,7 @@ test('defaultFormatter with complex mock', function(t) {
     chalk.stripColor(defaultFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
-    })),
+    }).output),
     complexOutput,
     'complex'
   );
@@ -148,7 +149,7 @@ test('defaultFormatter with complex mock', function(t) {
     chalk.stripColor(noPositionSortFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
-    })),
+    }).output),
     noPositionSortOutput,
     '`sortByPosition: false` complex'
   );
@@ -158,7 +159,7 @@ test('defaultFormatter with complex mock', function(t) {
     chalk.stripColor(positionlessLastFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
-    })),
+    }).output),
     positionlessLastOutput,
     '`positionless: last` complex'
   );
@@ -168,7 +169,7 @@ test('defaultFormatter with complex mock', function(t) {
     chalk.stripColor(noSortFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
-    })),
+    }).output),
     noSortOutput,
     'unsorted complex'
   );
@@ -189,15 +190,14 @@ var onRootMessages = [
   },
 ];
 
-var onRootResult = '\n<input css 1>' +
-  '\n' + colorlessWarning + '  blergh [reject-root]\n';
+var onRootResult = '\n<input css 1>\n      ' + colorlessWarning + '  blergh  reject-root\n';
 
 test('defaultFormatter with mocked warning on root', function(t) {
   t.equal(
     chalk.stripColor(defaultFormatter({
       messages: onRootMessages,
       source: '<input css 1>',
-    })),
+    }).output),
     onRootResult
   );
   t.end();
@@ -211,14 +211,14 @@ var oneMessage = [
   },
 ];
 
-var oneMessageResult = '\n' + colorlessWarning + '  foo warning [foo]\n';
+var oneMessageResult = '\n      ' + colorlessWarning + '  foo warning  foo\n';
 
 test('defaultFormatter with undefined source', function(t) {
   t.equal(
     chalk.stripColor(defaultFormatter({
       messages: oneMessage,
       source: undefined,
-    })),
+    }).output),
     oneMessageResult
   );
   t.end();
@@ -226,7 +226,7 @@ test('defaultFormatter with undefined source', function(t) {
 
 test('defaultFormatter with no messages', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({ messages: [] })),
+    chalk.stripColor(defaultFormatter({ messages: [] }).output),
     ''
   );
   t.end();
@@ -245,11 +245,11 @@ test('defaultFormatter with real sourcemaps', function(t) {
     map: { prev: map },
   });
 
-  var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo' };
+  var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo', type: 'error' };
 
   t.equal(
-    chalk.stripColor(defaultFormatter({ messages: [message] })),
-    '\n102:107\tblargh [foo]\n'
+    chalk.stripColor(defaultFormatter({ messages: [message] }).output),
+    '\n  102:107   ' + colorlessError + '  blargh  foo\n'
   );
   t.end();
 });

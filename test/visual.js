@@ -7,8 +7,8 @@ var sourceMap = require('source-map');
 var reporterOptions = {
   // positionless: 'last',
   // sortByPosition: true,
-  noIcon: true,
-  noPlugin: true,
+  // noIcon: true,
+  // noPlugin: true,
 };
 
 fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, data) {
