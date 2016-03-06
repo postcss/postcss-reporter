@@ -55,10 +55,10 @@ test('defaultFormatter with simple mock messages', function(t) {
 });
 
 var basicOutputMinimal = '\n<input css 1>' +
-  '\n      warning  foo warning' +
-  '\n      warning  bar warning' +
-  '\n      warning  baz warning' +
-  '\n      error    baz error' +
+  '\n      warning  foo warning   ' +
+  '\n      warning  bar warning   ' +
+  '\n      warning  baz warning   ' +
+  '\n      error    baz error     ' +
   '\n';
 
 test('defaultFormatter with noIcon and noPlugin and simple mock messages', function(t) {
@@ -106,31 +106,31 @@ var complexMessages = [
 ];
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
-  '\n         ' + colorlessError +   '  baz error    baz' +
-  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
-  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
-  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
+  '\n       ' + colorlessError +   '  baz error    baz' +
+  '\n 1:99  ' + colorlessWarning + '  bar warning  bar' +
+  '\n 3:5   ' + colorlessWarning + '  foo warning  foo' +
+  '\n 8:13  ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 var noPositionSortOutput = '\nstyle/rainbows/horses.css' +
-  '\n         ' + colorlessError +   '  baz error    baz' +
-  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
-  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
-  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
+  '\n       ' + colorlessError +   '  baz error    baz' +
+  '\n 3:5   ' + colorlessWarning + '  foo warning  foo' +
+  '\n 1:99  ' + colorlessWarning + '  bar warning  bar' +
+  '\n 8:13  ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 var positionlessLastOutput = '\nstyle/rainbows/horses.css' +
-  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
-  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
-  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
-  '\n         ' + colorlessError +   '  baz error    baz' +
+  '\n 1:99  ' + colorlessWarning + '  bar warning  bar' +
+  '\n 3:5   ' + colorlessWarning + '  foo warning  foo' +
+  '\n 8:13  ' + colorlessWarning + '  ha warning   foo' +
+  '\n       ' + colorlessError +   '  baz error    baz' +
   '\n';
 
 var noSortOutput = '\nstyle/rainbows/horses.css' +
-  '\n  3:5    ' + colorlessWarning + '  foo warning  foo' +
-  '\n         ' + colorlessError +   '  baz error    baz' +
-  '\n  1:99   ' + colorlessWarning + '  bar warning  bar' +
-  '\n  8:13   ' + colorlessWarning + '  ha warning   foo' +
+  '\n 3:5   ' + colorlessWarning + '  foo warning  foo' +
+  '\n       ' + colorlessError +   '  baz error    baz' +
+  '\n 1:99  ' + colorlessWarning + '  bar warning  bar' +
+  '\n 8:13  ' + colorlessWarning + '  ha warning   foo' +
   '\n';
 
 test('defaultFormatter with complex mock', function(t) {
@@ -249,7 +249,7 @@ test('defaultFormatter with real sourcemaps', function(t) {
 
   t.equal(
     chalk.stripColor(defaultFormatter({ messages: [message] }).output),
-    '\n  102:107   ' + colorlessWarning + '  blargh  foo\n'
+    '\n 102:107  ' + colorlessWarning + '  blargh  foo\n'
   );
   t.end();
 });
