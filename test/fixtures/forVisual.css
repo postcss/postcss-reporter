@@ -2,8 +2,9 @@
   top:0px;
 }
 .foo {
-  background: orange;
+   background: orange;
 }
 .bar {
   color:pink;
+  padding: 0em;
 }

@@ -7,8 +7,8 @@ var sourceMap = require('source-map');
 var reporterOptions = {
   // positionless: 'last',
   // sortByPosition: true,
-  noIcon: true,
-  noPlugin: true,
+  // noIcon: true,
+  // noPlugin: true,
 };
 
 fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, data) {
@@ -22,10 +22,10 @@ fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, d
   postcss()
     .use(stylelint({
       rules: {
-        'block-opening-brace-newline-after': [2, 'always'],
-        'declaration-colon-space-after': [2, 'always'],
-        'number-zero-length-no-unit': [2],
-        'indentation': [2, 'tlab'],
+        'block-opening-brace-newline-after': ['always'],
+        'declaration-colon-space-after': ['always'],
+        'number-zero-length-no-unit': [true, {warn: true}],
+        'indentation': 2,
       },
     }))
     .use(reporter(reporterOptions))
