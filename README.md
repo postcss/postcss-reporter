@@ -1,4 +1,4 @@
-# postcss-reporter 
+# postcss-reporter
 [![Build Status](https://travis-ci.org/postcss/postcss-reporter.svg?branch=master)](https://travis-ci.org/postcss/postcss-reporter)[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/davidtheclark/postcss-reporter/master.svg?label=windows%20build)](https://ci.appveyor.com/project/davidtheclark/postcss-reporter)
 
 A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
@@ -70,9 +70,14 @@ reporter({
 
 **plugins** (array of strings, default = `[]`)
 
-If empty, the plugin will log every message, regardless of which plugin registered it.
-To limit output, name the plugins whose messages you would like to see.
+- If empty, the plugin will log every message, regardless which plugin registered it.
+- To limit output, name the plugins whose messages you would like to show.
 For example, `{ plugins: ['postcss-bem-linter'] }` will only log messages from the `postcss-bem-linter` plugin.
+- Alternatively, prefix the plugins whose messages you would like to hide with `'!'`.
+For example, `{ plugins: ['!postcss-bem-linter'] }` will never log messages from the `postcss-bem-linter` plugin.
+Ignored in combined with unprefixed plugins.
+- For more flexibility, pass a filter function.
+For example, `function(message) { return message.type === 'error'; }` will only log `error` messages regardless which plugin.
 
 **throwError** (boolean, default = `false`)
 
