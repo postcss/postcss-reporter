@@ -47,7 +47,7 @@ test('reporter with simple mock result', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result and specified plugin', function(t) {
+test('reporter with simple mock result and specified plugins', function(t) {
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
