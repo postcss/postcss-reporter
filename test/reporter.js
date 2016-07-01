@@ -73,6 +73,60 @@ test('reporter with simple mock result and specified plugins', function(t) {
   t.end();
 });
 
+test('reporter with simple mock result and ignored plugins', function(t) {
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+    plugins: ['!foo', '!baz'],
+  });
+  testReporter(null, mockSimpleResult);
+  t.deepEqual(
+    tracker.messages,
+    [
+      {
+        type: 'warning',
+        plugin: 'bar',
+        text: 'bar warning',
+      },
+    ]
+  );
+  t.end();
+});
+
+test('reporter with simple mock result and filtering plugins', function(t) {
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+    plugins: function(message) { return message.type === 'error'; },
+  });
+  testReporter(null, mockSimpleResult);
+  t.deepEqual(
+    tracker.messages,
+    [
+      {
+        type: 'error',
+        plugin: 'baz',
+        text: 'baz error',
+      },
+    ]
+  );
+  t.end();
+});
+
+test('reporter with simple mock result and empty plugins', function(t) {
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+    plugins: [],
+  });
+  testReporter(null, mockSimpleResult);
+  t.deepEqual(
+    tracker.messages,
+    undefined
+  );
+  t.end();
+});
+
 test('reporter with simple mock result and clearMessages', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
