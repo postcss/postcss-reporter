@@ -122,7 +122,7 @@ test('reporter with simple mock result and empty plugins', function(t) {
   testReporter(null, mockSimpleResult);
   t.deepEqual(
     tracker.messages,
-    undefined
+    mockSimpleResult.messages
   );
   t.end();
 });
