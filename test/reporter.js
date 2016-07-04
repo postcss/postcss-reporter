@@ -47,7 +47,7 @@ test('reporter with simple mock result', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result and specified plugins', function(t) {
+test('reporter with simple mock result and whitelisted plugins', function(t) {
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -73,7 +73,7 @@ test('reporter with simple mock result and specified plugins', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result and ignored plugins', function(t) {
+test('reporter with simple mock result and blacklisted plugins', function(t) {
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -93,7 +93,7 @@ test('reporter with simple mock result and ignored plugins', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result and filtering plugins', function(t) {
+test('reporter with simple mock result and function-filtered plugins', function(t) {
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -139,7 +139,7 @@ test('reporter with simple mock result and clearMessages', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result, specified plugins, and clearMessages', function(t) {
+test('reporter with simple mock result, whitelisted plugins, and clearMessages', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
