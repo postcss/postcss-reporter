@@ -70,14 +70,17 @@ reporter({
 
 **plugins** (array of strings, default = `[]`)
 
-- If empty, the plugin will log every message, regardless which plugin registered it.
-- To limit output, name the plugins whose messages you would like to show.
-For example, `{ plugins: ['postcss-bem-linter'] }` will only log messages from the `postcss-bem-linter` plugin.
-- Alternatively, prefix the plugins whose messages you would like to hide with `'!'`.
-For example, `{ plugins: ['!postcss-bem-linter'] }` will never log messages from the `postcss-bem-linter` plugin.
-Ignored in combined with unprefixed plugins.
-- For more flexibility, pass a filter function.
-For example, `function(message) { return message.type === 'error'; }` will only log `error` messages regardless which plugin.
+If `plugins` is empty (as it is by default), the reporter will log messages from every PostCSS plugin.
+
+There are 3 ways to limit output:
+
+- **Whitelist:** Provide an array of the plugins whose messages you would like to show.
+  For example, `{ plugins: ['postcss-bem-linter'] }` will only log messages from the `postcss-bem-linter` plugin.
+- **Blacklist:** Prefix all plugins in the array with `!` to specify only those plugins whose messages you would like to hide.
+  (All other plugins will be shown.)
+  For example, `{ plugins: ['!postcss-bem-linter'] }` will never log messages from the `postcss-bem-linter` plugin; but will log messages from every other plugin.
+- **Filter:** Provide a filter function.
+  For example, `function(message) { return message.type === 'error'; }` will only log `error` messages, regardless of the plugin.
 
 **throwError** (boolean, default = `false`)
 
