@@ -240,9 +240,11 @@ test('defaultFormatter with real sourcemaps', function(t) {
     original: { line: 102, column: 107 },
   });
 
+  console.log(map instanceof sourceMap.SourceMapGenerator)
+
   var root = postcss.parse('.button { color: red; }', {
     from: 'file.css',
-    map: { prev: map },
+    map: { prev: map.toString() },
   });
 
   var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo' };

@@ -7,8 +7,9 @@ var sourceMap = require('source-map');
 var reporterOptions = {
   // positionless: 'last',
   // sortByPosition: true,
-  noIcon: true,
-  noPlugin: true,
+  // noIcon: true,
+  // noPlugin: true,
+  // plugins: ['stylelint'],
 };
 
 fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, data) {
@@ -45,5 +46,5 @@ function createSourceMap() {
     source: 'forVisual.original.css',
     original: { line: 102, column: 107 },
   });
-  return map;
+  return map.toString();
 }
