@@ -1,7 +1,8 @@
 # Changelog
 
 ## Head
-- Add blacklist and filter function functionality to `plugins` option.
+- Add `filter` option.
+- Add blacklist functionality to `plugins` option with `!` prefix`.
 
 ## 1.3.3
 - Fix regression that caused positions from sources without incoming sourcemaps not to be logged.

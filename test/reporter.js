@@ -97,7 +97,7 @@ test('reporter with simple mock result and function-filtered plugins', function(
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
-    plugins: function(message) { return message.type === 'error'; },
+    filter: function(message) { return message.type === 'error'; },
   });
   testReporter(null, mockSimpleResult);
   t.deepEqual(
