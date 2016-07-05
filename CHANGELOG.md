@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.4.0
+## 1.4.1
 - Add `filter` option.
 - Add blacklist functionality to `plugins` option with `!` prefix`.
 
