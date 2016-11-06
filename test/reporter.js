@@ -20,7 +20,7 @@ var mockSimpleResult = {
       text: 'baz warning',
     },
     {
-      type: 'error',
+      type: 'warning',
       plugin: 'baz',
       text: 'baz error',
     },
@@ -43,6 +43,52 @@ test('reporter with simple mock result', function(t) {
     testReporter(null, mockSimpleResult);
   });
   t.deepEqual(tracker.messages, mockSimpleResult.messages);
+  t.equal(tracker.source, '<input css 1>');
+  t.end();
+});
+
+var mockResultContainingNonWarningMessage = {
+  messages: [
+    {
+      type: 'dependency',
+      plugin: 'foo',
+    },
+    {
+      type: 'warning',
+      plugin: 'foo',
+      text: 'foo warning',
+    },
+    {
+      type: 'error',
+      plugin: 'foo',
+      text: 'foo error',
+    },
+  ],
+  root: {
+    source: {
+      input: {
+        id: '<input css 1>',
+      },
+    },
+  },
+};
+
+test('reporter with simple mock result containing non warning typed message', function(t) {
+  var tracker = {};
+  var expectedMessages = [
+    {
+      type: 'warning',
+      plugin: 'foo',
+      text: 'foo warning',
+    },
+  ];
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+  });
+  t.doesNotThrow(function() {
+    testReporter(null, mockResultContainingNonWarningMessage);
+  });
+  t.deepEqual(tracker.messages, expectedMessages);
   t.equal(tracker.source, '<input css 1>');
   t.end();
 });
@@ -94,12 +140,20 @@ test('reporter with simple mock result and blacklisted plugins', function(t) {
 });
 
 test('reporter with simple mock result and function-filtered plugins', function(t) {
+  var cloneResult = _.cloneDeep(mockSimpleResult);
+  cloneResult.messages.push(
+    {
+      type: 'error',
+      plugin: 'baz',
+      text: 'baz error',
+    }
+  );
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
     filter: function(message) { return message.type === 'error'; },
   });
-  testReporter(null, mockSimpleResult);
+  testReporter(null, cloneResult);
   t.deepEqual(
     tracker.messages,
     [
@@ -185,9 +239,9 @@ function mockFormatter(tracker) {
 var mockResultFromFile = {
   messages: [
     {
-      type: 'error',
+      type: 'warning',
       plugin: 'baz',
-      text: 'baz error',
+      text: 'baz warning',
     },
   ],
   root: {
@@ -212,9 +266,9 @@ test('reporter with mock containing file source', function(t) {
 var mockResultNoSource = {
   messages: [
     {
-      type: 'error',
+      type: 'warning',
       plugin: 'baz',
-      text: 'baz error',
+      text: 'baz warning',
     },
   ],
   root: {},
@@ -364,45 +418,6 @@ test('reporter with warnings that messages that each have nodes', function(t) {
               },
             },
           },
-        },
-      ],
-    },
-    {
-      source: '<input css 2>',
-      messages: [
-        {
-          type: 'error',
-          plugin: 'pat',
-          text: 'pat error',
-          node: {
-            source: {
-              input: {
-                id: '<input css 2>',
-              },
-            },
-          },
-        },
-        {
-          type: 'error',
-          plugin: 'hoo',
-          text: 'hoo error',
-          node: {
-            source: {
-              input: {
-                id: '<input css 2>',
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      source: '<input css 1>',
-      messages: [
-        {
-          type: 'error',
-          plugin: 'hah',
-          text: 'hah error',
         },
       ],
     },
