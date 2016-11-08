@@ -12,6 +12,8 @@ So this plugin exists to read the accumulated messages (or messages from only th
 
 By default, the messages are formatted for human legibility and sorted according to the line/column positions attached to the messages. But another formatting function can be passed in with an option, and sorting can be turned of with an option.
 
+*By default, only warnings are logged*. If you would like to see more messages, you can change the `filter` function.
+
 ## Example Output
 
 ![Example](example.png?raw=true)
@@ -84,7 +86,9 @@ There are 2 ways to limit output:
 
 Provide a filter function. It receives the message object and returns a truthy or falsy value, indicating whether that particular message should be reported or not.
 
-For example, `function(message) { return message.type === 'warning'; }` will only log `warning` messages, regardless of the plugin.
+By default, only messages with `type: "warning"` warnings are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
+
+For example, `function(message) { return true }` will only every message, regardless of the plugin or whether it's a warning or not.
 
 **throwError** (boolean, default = `false`)
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+- Only log warning messages (`type: "warning"`) by default.
+
 ## 1.4.1
 - Add `filter` option.
 - Add blacklist functionality to `plugins` option with `!` prefix`.
