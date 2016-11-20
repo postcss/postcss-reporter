@@ -48,7 +48,7 @@ gulp.task('css', function() {
 
 ## Options
 
-**clearMessages** (boolean, default = `false`)
+**clearReportedMessages** (boolean, default = `false`)
 
 If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
 
@@ -89,6 +89,12 @@ Provide a filter function. It receives the message object and returns a truthy o
 By default, only messages with `type: "warning"` warnings are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
 
 For example, `function(message) { return true }` will only every message, regardless of the plugin or whether it's a warning or not.
+
+**clearMessagesFilter** (function)
+
+Provide a filter function to clear the messages. This prevents other plugins, or the whatever runner you use, from logging.
+
+It receives the message object and returns a truthy or falsy value, indicating whether that particular message should be cleared or not for others plugins.
 
 **throwError** (boolean, default = `false`)
 
