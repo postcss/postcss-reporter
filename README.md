@@ -90,7 +90,7 @@ By default, only messages with `type: "warning"` warnings are logged. (These are
 
 For example, `function(message) { return true }` will only every message, regardless of the plugin or whether it's a warning or not.
 
-**clearMessagesFilter** (function)
+**clearAllMessages** (function)
 
 Provide a filter function to clear the messages. This prevents other plugins, or the whatever runner you use, from logging.
 

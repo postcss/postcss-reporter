@@ -215,12 +215,12 @@ test('reporter with simple mock result, whitelisted plugins and clearReportedMes
   t.end();
 });
 
-test('reporter with simple mock result and clearMessagesFilter', function(t) {
+test('reporter with simple mock result and clearAllMessages', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
-    clearMessagesFilter: function(message) {
+    clearAllMessages: function(message) {
       return (message.text === 'foo warning' || message.text === 'bar warning');
     },
   });
@@ -240,13 +240,13 @@ test('reporter with simple mock result and clearMessagesFilter', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result, clearMessagesFilter and whitelisted plugins', function(t) {
+test('reporter with simple mock result, clearAllMessages and whitelisted plugins', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
     plugins: ['foo'],
-    clearMessagesFilter: function(message) {
+    clearAllMessages: function(message) {
       return (message.text === 'foo warning' || message.text === 'bar warning');
     },
   });
