@@ -220,23 +220,10 @@ test('reporter with simple mock result and clearAllMessages', function(t) {
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
-    clearAllMessages: function(message) {
-      return (message.text === 'foo warning' || message.text === 'bar warning');
-    },
+    clearAllMessages: true,
   });
   testReporter(null, cloneResult);
-  t.deepEqual(cloneResult.messages, [
-    {
-      type: 'warning',
-      plugin: 'baz',
-      text: 'baz warning',
-    },
-    {
-      type: 'warning',
-      plugin: 'baz',
-      text: 'baz error',
-    },
-  ]);
+  t.deepEqual(cloneResult.messages, []);
   t.end();
 });
 
@@ -246,28 +233,29 @@ test('reporter with simple mock result, clearAllMessages and whitelisted plugins
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
     plugins: ['foo'],
-    clearAllMessages: function(message) {
-      return (message.text === 'foo warning' || message.text === 'bar warning');
-    },
+    clearAllMessages: true,
   });
   testReporter(null, cloneResult);
-  t.deepEqual(cloneResult.messages, [
-    {
-      type: 'warning',
-      plugin: 'bar',
-      text: 'bar warning',
-    },
-    {
-      type: 'warning',
-      plugin: 'baz',
-      text: 'baz warning',
-    },
-    {
-      type: 'warning',
-      plugin: 'baz',
-      text: 'baz error',
-    },
-  ]);
+  t.deepEqual(
+    cloneResult.messages,
+    [
+      {
+        type: 'warning',
+        plugin: 'bar',
+        text: 'bar warning',
+      },
+      {
+        type: 'warning',
+        plugin: 'baz',
+        text: 'baz warning',
+      },
+      {
+        type: 'warning',
+        plugin: 'baz',
+        text: 'baz error',
+      },
+    ]
+  );
   t.end();
 });
 
