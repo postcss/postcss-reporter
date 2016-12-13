@@ -1,5 +1,6 @@
 # postcss-reporter
-[![Build Status](https://travis-ci.org/postcss/postcss-reporter.svg?branch=master)](https://travis-ci.org/postcss/postcss-reporter)[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/davidtheclark/postcss-reporter/master.svg?label=windows%20build)](https://ci.appveyor.com/project/davidtheclark/postcss-reporter)
+[![Build Status](https://travis-ci.org/postcss/postcss-reporter.svg?branch=master)](https://travis-ci.org/postcss/postcss-reporter)
+[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/davidtheclark/postcss-reporter/master.svg?label=windows%20build)](https://ci.appveyor.com/project/davidtheclark/postcss-reporter)
 
 A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
 

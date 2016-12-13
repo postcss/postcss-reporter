@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0
+
+- Replace `clearMessages` option with `clearReportedMessages` and `clearAllMessages`.
+
 ## 2.0.0
 
 - Only log warning messages (`type: "warning"`) by default.
