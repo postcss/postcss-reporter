@@ -181,25 +181,25 @@ test('reporter with simple mock result and empty plugins', function(t) {
   t.end();
 });
 
-test('reporter with simple mock result and clearMessages', function(t) {
+test('reporter with simple mock result and clearReportedMessages', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
-    clearMessages: true,
+    clearReportedMessages: true,
   });
   testReporter(null, cloneResult);
   t.deepEqual(cloneResult.messages, []);
   t.end();
 });
 
-test('reporter with simple mock result, whitelisted plugins, and clearMessages', function(t) {
+test('reporter with simple mock result, whitelisted plugins and clearReportedMessages', function(t) {
   var cloneResult = _.cloneDeep(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
     plugins: ['baz', 'foo'],
-    clearMessages: true,
+    clearReportedMessages: true,
   });
   testReporter(null, cloneResult);
   t.deepEqual(
@@ -209,6 +209,50 @@ test('reporter with simple mock result, whitelisted plugins, and clearMessages',
         type: 'warning',
         plugin: 'bar',
         text: 'bar warning',
+      },
+    ]
+  );
+  t.end();
+});
+
+test('reporter with simple mock result and clearAllMessages', function(t) {
+  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+    clearAllMessages: true,
+  });
+  testReporter(null, cloneResult);
+  t.deepEqual(cloneResult.messages, []);
+  t.end();
+});
+
+test('reporter with simple mock result, clearAllMessages and whitelisted plugins', function(t) {
+  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var tracker = {};
+  var testReporter = reporter({
+    formatter: mockFormatter(tracker),
+    plugins: ['foo'],
+    clearAllMessages: true,
+  });
+  testReporter(null, cloneResult);
+  t.deepEqual(
+    cloneResult.messages,
+    [
+      {
+        type: 'warning',
+        plugin: 'bar',
+        text: 'bar warning',
+      },
+      {
+        type: 'warning',
+        plugin: 'baz',
+        text: 'baz warning',
+      },
+      {
+        type: 'warning',
+        plugin: 'baz',
+        text: 'baz error',
       },
     ]
   );
