@@ -3,6 +3,7 @@
 ## 4.0.0
 
 - Upgrade to PostCSS v6. (If you still use PostCSS v5, stick with v3 until you can upgrade your PostCSS.)
+- Switched PostCSS to a peer dependency.
 
 ## 3.0.0
 
