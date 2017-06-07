@@ -1,6 +1,6 @@
 {
   "name": "postcss-reporter",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Log PostCSS messages in the console",
   "main": "index.js",
   "scripts": {
@@ -31,12 +31,15 @@
     "less": "2.7.1",
     "source-map": "0.5.6",
     "stylelint": "6.8.0",
-    "tape": "4.6.0"
+    "tape": "4.6.0",
+    "postcss": "^6.0.0"
   },
   "dependencies": {
     "chalk": "^1.0.0",
     "lodash": "^4.1.0",
-    "log-symbols": "^1.0.2",
-    "postcss": "^5.0.0"
+    "log-symbols": "^1.0.2"
+  },
+  "peerDependencies": {
+    "postcss": "^6.0.0"
   }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0
+
+- Upgrade to PostCSS v6. (If you still use PostCSS v5, stick with v3 until you can upgrade your PostCSS.)
+
 ## 3.0.0
 
 - Replace `clearMessages` option with `clearReportedMessages` and `clearAllMessages`.
