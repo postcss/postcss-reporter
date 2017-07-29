@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 5.0.0
 
 - Move PostCSS from `peerDependencies` to `dependencies`.
 - Drop support for Node 0.12.
