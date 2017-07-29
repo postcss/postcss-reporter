@@ -3,6 +3,7 @@
 ## Head
 
 - Move PostCSS from `peerDependencies` to `dependencies`.
+- Drop support for Node 0.12.
 
 ## 4.0.0
 

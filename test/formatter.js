@@ -5,10 +5,11 @@ var symbols = require('log-symbols');
 var path = require('path');
 var sourceMap = require('source-map');
 var postcss = require('postcss');
+var stripColor = require('strip-color');
 
 var defaultFormatter = formatter();
 
-var colorlessWarning = chalk.stripColor(symbols.warning);
+var colorlessWarning = stripColor(symbols.warning);
 
 var basicMessages = [
   {
@@ -49,7 +50,7 @@ var basicOutputMinimal = '\n<input css 1>' +
 
 test('defaultFormatter with simple mock messages', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({
+    stripColor(defaultFormatter({
       messages: basicMessages,
       source: '<input css 1>',
     })),
@@ -67,7 +68,7 @@ test('defaultFormatter with noIcon and noPlugin and simple mock messages', funct
   });
 
   t.equal(
-    chalk.stripColor(minimalFormatter({
+    stripColor(minimalFormatter({
       messages: basicMessages,
       source: '<input css 1>',
     })),
@@ -134,7 +135,7 @@ var noSortOutput = '\nstyle/rainbows/horses.css' +
 
 test('defaultFormatter with complex mock', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({
+    stripColor(defaultFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
     })),
@@ -145,7 +146,7 @@ test('defaultFormatter with complex mock', function(t) {
   var noPositionSortFormatter = formatter({ sortByPosition: false });
 
   t.equal(
-    chalk.stripColor(noPositionSortFormatter({
+    stripColor(noPositionSortFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
     })),
@@ -155,7 +156,7 @@ test('defaultFormatter with complex mock', function(t) {
 
   var positionlessLastFormatter = formatter({ positionless: 'last' });
   t.equal(
-    chalk.stripColor(positionlessLastFormatter({
+    stripColor(positionlessLastFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
     })),
@@ -165,7 +166,7 @@ test('defaultFormatter with complex mock', function(t) {
 
   var noSortFormatter = formatter({ sortByPosition: false, positionless: 'any' });
   t.equal(
-    chalk.stripColor(noSortFormatter({
+    stripColor(noSortFormatter({
       messages: complexMessages,
       source: path.resolve(process.cwd(), 'style/rainbows/horses.css'),
     })),
@@ -194,7 +195,7 @@ var onRootResult = '\n<input css 1>' +
 
 test('defaultFormatter with mocked warning on root', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({
+    stripColor(defaultFormatter({
       messages: onRootMessages,
       source: '<input css 1>',
     })),
@@ -215,7 +216,7 @@ var oneMessageResult = '\n' + colorlessWarning + '  foo warning [foo]\n';
 
 test('defaultFormatter with undefined source', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({
+    stripColor(defaultFormatter({
       messages: oneMessage,
       source: undefined,
     })),
@@ -226,7 +227,7 @@ test('defaultFormatter with undefined source', function(t) {
 
 test('defaultFormatter with no messages', function(t) {
   t.equal(
-    chalk.stripColor(defaultFormatter({ messages: [] })),
+    stripColor(defaultFormatter({ messages: [] })),
     ''
   );
   t.end();
@@ -250,7 +251,7 @@ test('defaultFormatter with real sourcemaps', function(t) {
   var message = { line: 2, column: 7, node: root.nodes[0], text: 'blargh', plugin: 'foo' };
 
   t.equal(
-    chalk.stripColor(defaultFormatter({ messages: [message] })),
+    stripColor(defaultFormatter({ messages: [message] })),
     '\n102:107\tblargh [foo]\n'
   );
   t.end();
