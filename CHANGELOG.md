@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Move PostCSS from `peerDependencies` to `dependencies`.
+
 ## 4.0.0
 
 - Upgrade to PostCSS v6. (If you still use PostCSS v5, stick with v3 until you can upgrade your PostCSS.)
