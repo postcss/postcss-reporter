@@ -38,9 +38,9 @@
     "chalk": "^2.0.1",
     "lodash": "^4.17.4",
     "log-symbols": "^2.0.0",
-    "postcss": "^6.0.8"
+    "postcss": "^7.0.2"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   }
 }
