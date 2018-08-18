@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.0
+
+- Upgrade to PostCSS 7.
+- Drop support for Node 4.
+
 ## 5.0.0
 
 - Move PostCSS from `peerDependencies` to `dependencies`.
