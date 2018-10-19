@@ -256,3 +256,30 @@ test('defaultFormatter with real sourcemaps', function(t) {
   );
   t.end();
 });
+
+var textlessMessages = [
+  {
+    type: 'warning',
+    plugin: 'foo',
+  },
+  {
+    type: 'dependency',
+    plugin: 'bar',
+    file: 'bar file',
+  },
+];
+
+var textlessMessagesOutput = '';
+
+test('defaultFormatter with messages without text property', function(t) {
+  t.equal(
+    stripColor(defaultFormatter({
+      messages: textlessMessages,
+      source: '<input css 1>',
+    })),
+    textlessMessagesOutput,
+    'basic'
+  );
+
+  t.end();
+});
