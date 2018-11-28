@@ -22,7 +22,7 @@ By default, the messages are formatted for human legibility and sorted according
 ## Installation
 
 ```
-npm install postcss-reporter
+npm install postcss-reporter --save-dev
 ```
 
 Version 1.0.0+ is compatible with PostCSS 5+. (Earlier versions are compatible with PostCSS 4.)
