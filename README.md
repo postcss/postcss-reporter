@@ -4,6 +4,12 @@
 
 A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
 
+---
+
+**SEEKING A NEW MAINTAINER!** Interested in contributing to the ecosystem of PostCSS and Stylelint? Please open an issue if you'd like to take over maintenance of this package.
+
+---
+
 ## Purpose
 
 As of PostCSS 4.1, a single PostCSS process can accumulate messages from all of the plugins it uses.
