@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.0.1
+
+- Fix support for messages without text (by @nodaguti).
+
 ## 6.0.0
 
 - Upgrade to PostCSS 7.
