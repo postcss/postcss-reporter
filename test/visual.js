@@ -23,10 +23,10 @@ fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, d
   postcss()
     .use(stylelint({
       rules: {
-        'block-opening-brace-newline-after': [2, 'always'],
-        'declaration-colon-space-after': [2, 'always'],
-        'number-zero-length-no-unit': [2],
-        'indentation': [2, 'tlab'],
+        'block-opening-brace-newline-after': 'always',
+        'declaration-colon-space-after': 'always',
+        'length-zero-no-unit': true,
+        'indentation': 'tab',
       },
     }))
     .use(reporter(reporterOptions))
