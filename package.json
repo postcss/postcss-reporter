@@ -12,21 +12,15 @@
     "index.js",
     "lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/postcss/postcss-reporter.git"
-  },
+  "repository": "postcss/postcss-reporter",
   "author": {
     "name": "David Clark",
     "email": "david.dave.clark@gmail.com",
     "url": "http://davidtheclark.com"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/postcss/postcss-reporter/issues"
-  },
-  "homepage": "https://github.com/postcss/postcss-reporter",
   "devDependencies": {
+    "clean-publish": "^1.1.0",
     "eslint": "1.3.1",
     "less": "2.7.1",
     "source-map": "0.5.6",
