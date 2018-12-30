@@ -1,8 +1,7 @@
 language: node_js
+cache: yarn
 node_js:
-  - "6"
+  - "node"
+  - "10"
   - "8"
-  - "stable"
-cache:
-  directories:
-    - node_modules
+  - "6"
