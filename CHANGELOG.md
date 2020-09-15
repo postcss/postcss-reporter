@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.0.0
+
+- Moved to PostCSS 8.
+- Moved `postcss` to `peerDependencies`.
+
 ## 6.0.1
 
 - Fix support for messages without text (by @nodaguti).
