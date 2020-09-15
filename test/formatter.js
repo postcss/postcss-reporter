@@ -1,6 +1,5 @@
 var test = require('tape');
 var formatter = require('../lib/formatter');
-var chalk = require('chalk');
 var symbols = require('log-symbols');
 var path = require('path');
 var sourceMap = require('source-map');
