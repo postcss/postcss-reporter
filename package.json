@@ -12,6 +12,9 @@
     "index.js",
     "lib"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "repository": "postcss/postcss-reporter",
   "author": {
     "name": "David Clark",
@@ -33,8 +36,5 @@
     "lodash": "^4.17.14",
     "log-symbols": "^2.2.0",
     "postcss": "^7.0.17"
-  },
-  "engines": {
-    "node": ">=6"
   }
 }
