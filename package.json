@@ -22,19 +22,22 @@
     "url": "http://davidtheclark.com"
   },
   "license": "MIT",
+  "peerDependencies": {
+    "postcss": "^8.0.3"
+  },
   "devDependencies": {
-    "clean-publish": "^1.1.0",
-    "eslint": "5.11.1",
-    "less": "3.9.0",
-    "source-map": "0.5.6",
+    "clean-publish": "^1.1.8",
+    "eslint": "7.9.0",
+    "less": "3.12.2",
+    "postcss": "^8.0.3",
+    "source-map": "0.7.3",
     "strip-color": "^0.1.0",
-    "stylelint": "9.9.0",
-    "tape": "^4.7.0"
+    "stylelint": "13.7.1",
+    "tape": "^5.0.1"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "lodash": "^4.17.14",
-    "log-symbols": "^2.2.0",
-    "postcss": "^7.0.17"
+    "chalk": "^4.1.0",
+    "lodash": "^4.17.20",
+    "log-symbols": "^4.0.0"
   }
 }
