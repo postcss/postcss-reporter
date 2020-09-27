@@ -40,7 +40,7 @@ test('reporter with simple mock result', function(t) {
     formatter: mockFormatter(tracker),
   });
   t.doesNotThrow(function() {
-    testReporter.RootExit(null, { result: mockSimpleResult });
+    testReporter.OnceExit(null, { result: mockSimpleResult });
   });
   t.deepEqual(tracker.messages, mockSimpleResult.messages);
   t.equal(tracker.source, '<input css 1>');
@@ -86,7 +86,7 @@ test('reporter with simple mock result containing non warning typed message', fu
     formatter: mockFormatter(tracker),
   });
   t.doesNotThrow(function() {
-    testReporter.RootExit(null, {
+    testReporter.OnceExit(null, {
       result: mockResultContainingNonWarningMessage,
     });
   });
@@ -101,7 +101,7 @@ test('reporter with simple mock result and whitelisted plugins', function(t) {
     formatter: mockFormatter(tracker),
     plugins: ['foo', 'bar'],
   });
-  testReporter.RootExit(null, { result: mockSimpleResult });
+  testReporter.OnceExit(null, { result: mockSimpleResult });
   t.deepEqual(
     tracker.messages,
     [
@@ -127,7 +127,7 @@ test('reporter with simple mock result and blacklisted plugins', function(t) {
     formatter: mockFormatter(tracker),
     plugins: ['!foo', '!baz'],
   });
-  testReporter.RootExit(null, { result: mockSimpleResult });
+  testReporter.OnceExit(null, { result: mockSimpleResult });
   t.deepEqual(
     tracker.messages,
     [
@@ -155,7 +155,7 @@ test('reporter with simple mock result and function-filtered plugins', function(
     formatter: mockFormatter(tracker),
     filter: function(message) { return message.type === 'error'; },
   });
-  testReporter.RootExit(null, { result: cloneResult });
+  testReporter.OnceExit(null, { result: cloneResult });
   t.deepEqual(
     tracker.messages,
     [
@@ -175,7 +175,7 @@ test('reporter with simple mock result and empty plugins', function(t) {
     formatter: mockFormatter(tracker),
     plugins: [],
   });
-  testReporter.RootExit(null, { result: mockSimpleResult });
+  testReporter.OnceExit(null, { result: mockSimpleResult });
   t.deepEqual(
     tracker.messages,
     mockSimpleResult.messages
@@ -190,7 +190,7 @@ test('reporter with simple mock result and clearReportedMessages', function(t) {
     formatter: mockFormatter(tracker),
     clearReportedMessages: true,
   });
-  testReporter.RootExit(null, { result: cloneResult });
+  testReporter.OnceExit(null, { result: cloneResult });
   t.deepEqual(cloneResult.messages, []);
   t.end();
 });
@@ -203,7 +203,7 @@ test('reporter with simple mock result, whitelisted plugins and clearReportedMes
     plugins: ['baz', 'foo'],
     clearReportedMessages: true,
   });
-  testReporter.RootExit(null, { result: cloneResult });
+  testReporter.OnceExit(null, { result: cloneResult });
   t.deepEqual(
     cloneResult.messages,
     [
@@ -224,7 +224,7 @@ test('reporter with simple mock result and clearAllMessages', function(t) {
     formatter: mockFormatter(tracker),
     clearAllMessages: true,
   });
-  testReporter.RootExit(null, { result: cloneResult });
+  testReporter.OnceExit(null, { result: cloneResult });
   t.deepEqual(cloneResult.messages, []);
   t.end();
 });
@@ -237,7 +237,7 @@ test('reporter with simple mock result, clearAllMessages and whitelisted plugins
     plugins: ['foo'],
     clearAllMessages: true,
   });
-  testReporter.RootExit(null, { result: cloneResult });
+  testReporter.OnceExit(null, { result: cloneResult });
   t.deepEqual(
     cloneResult.messages,
     [
@@ -269,7 +269,7 @@ test('reporter with simple mock result and throwError', function(t) {
     throwError: true,
   });
   t.throws(function() {
-    testReporter.RootExit(null, { result: cloneResult });
+    testReporter.OnceExit(null, { result: cloneResult });
   });
   t.end();
 });
@@ -304,7 +304,7 @@ test('reporter with mock containing file source', function(t) {
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
   });
-  testReporter.RootExit(null, { result: mockResultFromFile });
+  testReporter.OnceExit(null, { result: mockResultFromFile });
   t.equal(tracker.source, '/path/to/file.css');
   t.end();
 })
@@ -325,7 +325,7 @@ test('reporter with mock containing no source', function(t) {
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
   });
-  testReporter.RootExit(null, { result: mockResultNoSource });
+  testReporter.OnceExit(null, { result: mockResultNoSource });
   t.equal(tracker.source, '');
   t.end();
 })
@@ -419,7 +419,7 @@ test('reporter with warnings that messages that each have nodes', function(t) {
   var testReporter = reporter({
     formatter: mockMultiSourceFormatter(tracker),
   });
-  testReporter.RootExit(null, { result: mockWarningNodeResult });
+  testReporter.OnceExit(null, { result: mockWarningNodeResult });
   t.deepEqual(tracker, [
     {
       source: 'foo.css',

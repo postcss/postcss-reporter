@@ -23,17 +23,17 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "postcss": "^8.0.3"
+    "postcss": "^8.1.0"
   },
   "devDependencies": {
     "clean-publish": "^1.1.8",
-    "eslint": "7.9.0",
+    "eslint": "7.10.0",
     "less": "3.12.2",
     "lodash": "^4.17.20",
-    "postcss": "^8.0.3",
+    "postcss": "^8.1.0",
     "source-map": "0.7.3",
     "strip-color": "^0.1.0",
-    "stylelint": "13.7.1",
+    "stylelint": "13.7.2",
     "tape": "^5.0.1"
   },
   "dependencies": {
