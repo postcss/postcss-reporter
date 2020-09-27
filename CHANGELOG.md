@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.0.1
+
+- Moved to PostCSS 8.1.
+- Added funding links.
+
 ## 7.0.0
 
 - Moved to PostCSS 8.
