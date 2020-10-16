@@ -18,7 +18,7 @@ fs.readFile('test/fixtures/forVisual.css', { encoding: 'utf8' }, function(err, d
   var processOptions = {
     from: 'test/fixtures/forVisual.css',
     map: { prev: createSourceMap() },
-  }
+  };
 
   postcss()
     .use(stylelint({
