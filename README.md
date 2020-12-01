@@ -1,6 +1,4 @@
 # postcss-reporter
-[![Build Status](https://travis-ci.org/postcss/postcss-reporter.svg?branch=master)](https://travis-ci.org/postcss/postcss-reporter)
-[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/davidtheclark/postcss-reporter/master.svg?label=windows%20build)](https://ci.appveyor.com/project/davidtheclark/postcss-reporter)
 
 A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
 
@@ -13,7 +11,7 @@ A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by 
 ## Purpose
 
 As of PostCSS 4.1, a single PostCSS process can accumulate messages from all of the plugins it uses.
-Most of these messages are [warnings](https://github.com/postcss/postcss/blob/master/docs/guidelines/plugin.md#32-use-resultwarn-for-warnings).
+Most of these messages are [warnings](https://github.com/postcss/postcss/blob/main/docs/guidelines/plugin.md#32-use-resultwarn-for-warnings).
 Presumably, plugin authors want you to see those messages.
 So this plugin exists to read the accumulated messages (or messages from only the plugins you've specified), format them, and print them to the console.
 
