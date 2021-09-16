@@ -93,9 +93,9 @@ There are 2 ways to limit output:
 
 Provide a filter function. It receives the message object and returns a truthy or falsy value, indicating whether that particular message should be reported or not.
 
-By default, only messages with `type: "warning"` warnings are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
+By default, only messages with `type: "warning"` are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
 
-For example, `function(message) { return true }` will only every message, regardless of the plugin or whether it's a warning or not.
+For example, `function(message) { return true }` will return every message, regardless of whether or not the plugin declares it as a warning.
 
 **clearAllMessages** (boolean, default = `false`)
 
