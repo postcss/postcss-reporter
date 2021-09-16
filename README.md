@@ -15,7 +15,7 @@ Most of these messages are [warnings](https://github.com/postcss/postcss/blob/ma
 Presumably, plugin authors want you to see those messages.
 So this plugin exists to read the accumulated messages (or messages from only the plugins you've specified), format them, and print them to the console.
 
-By default, the messages are formatted for human legibility and sorted according to the line/column positions attached to the messages. But another formatting function can be passed in with an option, and sorting can be turned of with an option.
+By default, the messages are formatted for human legibility and sorted according to the line/column positions attached to the messages. But another formatting function can be passed in with an option, and sorting can be turned off with an option.
 
 *By default, only warnings are logged*. If you would like to see more messages, you can change the `filter` function.
 
@@ -55,7 +55,9 @@ gulp.task('css', function() {
 
 **clearReportedMessages** (boolean, default = `false`)
 
-If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the whatever runner you use, from logging the same information again and causing confusion.
+If true, the plugin will clear the result's messages after it logs them. This prevents other plugins, or the task runner you use, from logging the same information again and causing confusion.
+
+See also `clearAllMessages`.
 
 **formatter** (function, default = the default formatter)
 
@@ -91,13 +93,15 @@ There are 2 ways to limit output:
 
 Provide a filter function. It receives the message object and returns a truthy or falsy value, indicating whether that particular message should be reported or not.
 
-By default, only messages with `type: "warning"` warnings are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
+By default, only messages with `type: "warning"` are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
 
-For example, `function(message) { return true }` will only every message, regardless of the plugin or whether it's a warning or not.
+For example, `function(message) { return true }` will return every message, regardless of whether or not the plugin declares it as a warning.
 
 **clearAllMessages** (boolean, default = `false`)
 
-If `true`, not pass any messages into other plugins, or the whatever runner you use, for logging.
+If `true`, the plugin won't pass any messages into other plugins, or the task runner you use.
+
+See also `clearReportedMessages`.
 
 **throwError** (boolean, default = `false`)
 
