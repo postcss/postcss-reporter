@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.0.3
+
+- Replaced `colorette` with `nanocolors`.
+
 ## 7.0.2
 
 - Reduced dependencies (by @ludofischer).
