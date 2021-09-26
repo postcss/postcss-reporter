@@ -30,16 +30,16 @@
     "postcss": "^8.1.0"
   },
   "devDependencies": {
-    "clean-publish": "^1.1.8",
-    "eslint": "7.14.0",
+    "clean-publish": "^2.2.0",
+    "eslint": "7.32.0",
     "less": "3.12.2",
     "lodash": "^4.17.20",
     "log-symbols": "^4.0.0",
-    "postcss": "^8.1.10",
+    "postcss": "^8.3.8",
     "source-map": "0.7.3",
     "strip-color": "^0.1.0",
-    "stylelint": "13.8.0",
-    "tape": "^5.0.1"
+    "stylelint": "13.13.1",
+    "tape": "^5.3.1"
   },
   "dependencies": {
     "lodash.difference": "^4.5.0",
