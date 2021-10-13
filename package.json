@@ -47,6 +47,6 @@
     "lodash.get": "^4.4.2",
     "lodash.groupby": "^4.6.0",
     "lodash.sortby": "^4.7.0",
-    "nanocolors": "^0.2.6"
+    "picocolors": "^1.0.0"
   }
 }
