@@ -30,12 +30,12 @@
     "postcss": "^8.1.0"
   },
   "devDependencies": {
-    "clean-publish": "^2.2.0",
-    "eslint": "7.32.0",
+    "clean-publish": "^3.4.1",
+    "eslint": "8.0.0",
     "less": "3.12.2",
     "lodash": "^4.17.20",
     "log-symbols": "^4.0.0",
-    "postcss": "^8.3.8",
+    "postcss": "^8.3.9",
     "source-map": "0.7.3",
     "strip-color": "^0.1.0",
     "stylelint": "13.13.1",
@@ -48,5 +48,8 @@
     "lodash.groupby": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "picocolors": "^1.0.0"
+  },
+  "clean-publish": {
+    "cleanDocs": true
   }
 }
