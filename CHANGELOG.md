@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.0.4
+
+- Replaced `nanocolors` with `picocolors`.
+- Reduced package size.
+
 ## 7.0.3
 
 - Replaced `colorette` with `nanocolors`.
