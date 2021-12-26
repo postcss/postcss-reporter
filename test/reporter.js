@@ -1,5 +1,4 @@
 var test = require('tape');
-var _ = require('lodash');
 var reporter = require('../lib/reporter');
 
 var mockSimpleResult = {
@@ -33,6 +32,10 @@ var mockSimpleResult = {
     },
   },
 };
+
+function clone(toClone) {
+  return JSON.parse(JSON.stringify(toClone));
+}
 
 test('reporter with simple mock result', function(t) {
   var tracker = {};
@@ -142,7 +145,7 @@ test('reporter with simple mock result and blacklisted plugins', function(t) {
 });
 
 test('reporter with simple mock result and function-filtered plugins', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   cloneResult.messages.push(
     {
       type: 'error',
@@ -184,7 +187,7 @@ test('reporter with simple mock result and empty plugins', function(t) {
 });
 
 test('reporter with simple mock result and clearReportedMessages', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -196,7 +199,7 @@ test('reporter with simple mock result and clearReportedMessages', function(t) {
 });
 
 test('reporter with simple mock result, whitelisted plugins and clearReportedMessages', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -218,7 +221,7 @@ test('reporter with simple mock result, whitelisted plugins and clearReportedMes
 });
 
 test('reporter with simple mock result and clearAllMessages', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -230,7 +233,7 @@ test('reporter with simple mock result and clearAllMessages', function(t) {
 });
 
 test('reporter with simple mock result, clearAllMessages and whitelisted plugins', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -262,7 +265,7 @@ test('reporter with simple mock result, clearAllMessages and whitelisted plugins
 });
 
 test('reporter with simple mock result and throwError', function(t) {
-  var cloneResult = _.cloneDeep(mockSimpleResult);
+  var cloneResult = clone(mockSimpleResult);
   var tracker = {};
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
