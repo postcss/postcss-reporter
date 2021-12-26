@@ -1,6 +1,5 @@
 var test = require('tape');
 var formatter = require('../lib/formatter');
-var symbols = require('log-symbols');
 var path = require('path');
 var sourceMap = require('source-map');
 var postcss = require('postcss');
@@ -8,7 +7,7 @@ var stripColor = require('strip-color');
 
 var defaultFormatter = formatter();
 
-var colorlessWarning = stripColor(symbols.warning);
+var colorlessWarning = '⚠';
 
 var basicMessages = [
   {
