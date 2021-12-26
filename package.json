@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run lint && tape test",
+    "unit": "tape test",
+    "test": "pnpm lint && pnpm unit && pnpm visual",
     "visual": "node test/visual.js"
   },
   "files": [
