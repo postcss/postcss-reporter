@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.0.5
+
+- Reduced dependencies (by @onigoetz).
+
 ## 7.0.4
 
 - Replaced `nanocolors` with `picocolors`.
