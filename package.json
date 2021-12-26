@@ -30,15 +30,15 @@
     "postcss": "^8.1.0"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.1",
-    "eslint": "8.0.0",
-    "less": "3.12.2",
+    "clean-publish": "^3.4.4",
+    "eslint": "8.5.0",
+    "less": "4.1.2",
     "log-symbols": "^4.0.0",
-    "postcss": "^8.3.9",
+    "postcss": "^8.4.5",
     "source-map": "0.7.3",
     "strip-color": "^0.1.0",
-    "stylelint": "13.13.1",
-    "tape": "^5.3.1"
+    "stylelint": "14.2.0",
+    "tape": "^5.4.0"
   },
   "dependencies": {
     "picocolors": "^1.0.0",
