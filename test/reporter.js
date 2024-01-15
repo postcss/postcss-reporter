@@ -84,6 +84,11 @@ test('reporter with simple mock result containing non warning typed message', fu
       plugin: 'foo',
       text: 'foo warning',
     },
+    {
+      type: 'error', 
+      plugin: 'foo', 
+      text: 'foo error',
+    },
   ];
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
@@ -467,6 +472,45 @@ test('reporter with warnings that messages that each have nodes', function(t) {
               },
             },
           },
+        },
+      ],
+    },
+    {
+      source: '<input css 2>',
+      messages: [
+        { 
+          type: 'error', 
+          plugin: 'pat', 
+          text: 'pat error', 
+          node: {
+            source: {
+              input: {
+                id: '<input css 2>',
+              },
+            }, 
+          },
+        },
+        { 
+          type: 'error', 
+          plugin: 'hoo', 
+          text: 'hoo error', 
+          node: {
+            source: {
+              input: {
+                id: '<input css 2>',
+              },
+            }, 
+          },
+        },
+      ],
+    },
+    {
+      source: '<input css 1>',
+      messages: [
+        { 
+          type: 'error', 
+          plugin: 'hah', 
+          text: 'hah error',
         },
       ],
     },
