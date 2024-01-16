@@ -93,7 +93,7 @@ test('reporter with simple mock result containing non warning typed message', fu
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
   });
-  t.doesNotThrow(function() {
+  t.throws(function() {
     testReporter.OnceExit(null, {
       result: mockResultContainingNonWarningMessage,
     });
@@ -163,7 +163,11 @@ test('reporter with simple mock result and function-filtered plugins', function(
     formatter: mockFormatter(tracker),
     filter: function(message) { return message.type === 'error'; },
   });
-  testReporter.OnceExit(null, { result: cloneResult });
+  t.throws(function() {
+    testReporter.OnceExit(null, {
+      result: cloneResult,
+    });
+  });
   t.deepEqual(
     tracker.messages,
     [
@@ -427,7 +431,11 @@ test('reporter with warnings that messages that each have nodes', function(t) {
   var testReporter = reporter({
     formatter: mockMultiSourceFormatter(tracker),
   });
-  testReporter.OnceExit(null, { result: mockWarningNodeResult });
+  t.throws(function() {
+    testReporter.OnceExit(null, {
+      result: mockWarningNodeResult,
+    });
+  });
   t.deepEqual(tracker, [
     {
       source: 'foo.css',
