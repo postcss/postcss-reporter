@@ -84,11 +84,16 @@ test('reporter with simple mock result containing non warning typed message', fu
       plugin: 'foo',
       text: 'foo warning',
     },
+    {
+      type: 'error', 
+      plugin: 'foo', 
+      text: 'foo error',
+    },
   ];
   var testReporter = reporter({
     formatter: mockFormatter(tracker),
   });
-  t.doesNotThrow(function() {
+  t.throws(function() {
     testReporter.OnceExit(null, {
       result: mockResultContainingNonWarningMessage,
     });
@@ -158,7 +163,11 @@ test('reporter with simple mock result and function-filtered plugins', function(
     formatter: mockFormatter(tracker),
     filter: function(message) { return message.type === 'error'; },
   });
-  testReporter.OnceExit(null, { result: cloneResult });
+  t.throws(function() {
+    testReporter.OnceExit(null, {
+      result: cloneResult,
+    });
+  });
   t.deepEqual(
     tracker.messages,
     [
@@ -422,7 +431,11 @@ test('reporter with warnings that messages that each have nodes', function(t) {
   var testReporter = reporter({
     formatter: mockMultiSourceFormatter(tracker),
   });
-  testReporter.OnceExit(null, { result: mockWarningNodeResult });
+  t.throws(function() {
+    testReporter.OnceExit(null, {
+      result: mockWarningNodeResult,
+    });
+  });
   t.deepEqual(tracker, [
     {
       source: 'foo.css',
@@ -467,6 +480,45 @@ test('reporter with warnings that messages that each have nodes', function(t) {
               },
             },
           },
+        },
+      ],
+    },
+    {
+      source: '<input css 2>',
+      messages: [
+        { 
+          type: 'error', 
+          plugin: 'pat', 
+          text: 'pat error', 
+          node: {
+            source: {
+              input: {
+                id: '<input css 2>',
+              },
+            }, 
+          },
+        },
+        { 
+          type: 'error', 
+          plugin: 'hoo', 
+          text: 'hoo error', 
+          node: {
+            source: {
+              input: {
+                id: '<input css 2>',
+              },
+            }, 
+          },
+        },
+      ],
+    },
+    {
+      source: '<input css 1>',
+      messages: [
+        { 
+          type: 'error', 
+          plugin: 'hah', 
+          text: 'hah error',
         },
       ],
     },

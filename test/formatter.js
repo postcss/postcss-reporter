@@ -8,6 +8,7 @@ var stripColor = require('strip-color');
 var defaultFormatter = formatter();
 
 var colorlessWarning = '⚠';
+var colorlessError = '✖';
 
 var basicMessages = [
   {
@@ -36,7 +37,7 @@ var basicOutput = '\n<input css 1>' +
   '\n' + colorlessWarning + '  foo warning [foo]' +
   '\n' + colorlessWarning + '  bar warning [bar]' +
   '\n' + colorlessWarning + '  baz warning [baz]' +
-  '\nbaz error [baz]' +
+  '\n' + colorlessError + '  baz error [baz]' +
   '\n';
 
 var basicOutputMinimal = '\n<input css 1>' +
@@ -104,14 +105,14 @@ var complexMessages = [
 ];
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
-  '\nbaz error [baz]' +
+  '\n' + colorlessError + '  baz error [baz]' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
   '\n';
 
 var noPositionSortOutput = '\nstyle/rainbows/horses.css' +
-  '\nbaz error [baz]' +
+  '\n' + colorlessError + '  baz error [baz]' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
@@ -121,12 +122,12 @@ var positionlessLastOutput = '\nstyle/rainbows/horses.css' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
   '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
-  '\nbaz error [baz]' +
+  '\n' + colorlessError + '  baz error [baz]' +
   '\n';
 
 var noSortOutput = '\nstyle/rainbows/horses.css' +
   '\n3:5\t' + colorlessWarning + '  foo warning [foo]' +
-  '\nbaz error [baz]' +
+  '\n' + colorlessError + '  baz error [baz]' +
   '\n1:99\t' + colorlessWarning + '  bar warning [bar]' +
   '\n8:13\t' + colorlessWarning + '  ha warning [foo]' +
   '\n';
