@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1
+
+- Added better `error` message support (by Stéphane Goetz).
+
 ## 7.0.5
 
 - Reduced dependencies (by @onigoetz).
