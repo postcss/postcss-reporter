@@ -31,14 +31,14 @@
     "postcss": "^8.1.0"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.4",
-    "eslint": "8.5.0",
-    "less": "4.1.2",
-    "postcss": "^8.4.5",
-    "source-map": "0.7.3",
+    "clean-publish": "^4.2.0",
+    "eslint": "8.56.0",
+    "less": "4.2.0",
+    "postcss": "^8.4.33",
+    "source-map": "0.7.4",
     "strip-color": "^0.1.0",
-    "stylelint": "14.2.0",
-    "tape": "^5.4.0"
+    "stylelint": "16.1.0",
+    "tape": "^5.7.3"
   },
   "dependencies": {
     "picocolors": "^1.0.0",
