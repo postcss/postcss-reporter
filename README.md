@@ -127,7 +127,7 @@ If `true`, plugin names will not be printed in brackets after messages.
 
 ## How to get output without colors
 
-If you would like no colors in the console output, simply pass `--no-colors` when you invoke whatever command runs this plugin. (This works because of [chalk](https://github.com/sindresorhus/chalk).)
+If you would like no colors in the console output, simply pass `--no-colors` when you invoke whatever command runs this plugin. (This works because of [picocolors](https://github.com/alexeyraspopov/picocolors).)
 
 ## Standalone formatter
 
