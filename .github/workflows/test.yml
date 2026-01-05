@@ -16,7 +16,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -30,9 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version:
-          - 18
-          - 16
+        include:
+          - node-version: 18
+            pnpm-version: 10
+          - node-version: 16
+            pnpm-version: 8
     name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
@@ -40,7 +42,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: ${{ matrix.pnpm-version }}
       - name: Install Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
