@@ -1,77 +1,23 @@
 name: Test
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+
+on: [push, pull_request]
+
 permissions:
   contents: read
+
 jobs:
-  full:
-    name: Node.js 20 Full
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: pnpm
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Run tests
-        run: pnpm test
-  short:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
-        node-version:
-          - 18
-          - 16
-    name: Node.js ${{ matrix.node-version }} Quick
+        os: [ubuntu-latest, windows-latest]
+        node-version: [lts/*, latest]
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - name: Install dependencies
-        run: pnpm install --ignore-scripts
-      - name: Run unit tests
-        run: pnpm unit
-  old:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 14
-          - 12
-    name: Node.js ${{ matrix.node-version }} Quick
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v1
-        with:
-          version: 3
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile --ignore-scripts
-      - name: Run unit tests
-        run: pnpm unit
+      - run: npm ci
+      - run: npm test

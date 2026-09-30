@@ -2,54 +2,56 @@
   "name": "postcss-reporter",
   "version": "7.1.0",
   "description": "Log PostCSS messages in the console",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint .",
-    "unit": "tape test",
-    "test": "pnpm lint && pnpm unit && pnpm visual",
-    "visual": "node test/visual.js"
-  },
-  "files": [
-    "index.js",
-    "lib"
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-plugin",
+    "reporter",
+    "warnings"
   ],
-  "engines": {
-    "node": ">=10"
-  },
-  "repository": "postcss/postcss-reporter",
-  "author": {
-    "name": "David Clark",
-    "email": "david.dave.clark@gmail.com",
-    "url": "https://davidtheclark.com"
-  },
+  "homepage": "https://github.com/postcss/postcss-reporter",
   "license": "MIT",
-  "funding": [
+  "author": "MoOx",
+  "contributors": [
     {
-      "type": "opencollective",
-      "url": "https://opencollective.com/postcss/"
-    },
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/ai"
+      "name": "David Clark",
+      "email": "david.dave.clark@gmail.com",
+      "url": "https://davidtheclark.com"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/postcss/postcss-reporter.git"
+  },
+  "files": [
+    "LICENSE",
+    "index.js",
+    "lib/formatter.js",
+    "lib/reporter.js",
+    "lib/util.js"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "format": "oxfmt",
+    "lint": "oxlint && oxfmt --check",
+    "unit": "node --test",
+    "test": "npm run lint && npm run unit",
+    "visual": "node scripts/visual.js",
+    "release": "npx npmpub"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0",
+    "postcss": "^8.5.0",
+    "source-map": "^0.7.4"
+  },
   "peerDependencies": {
     "postcss": "^8.1.0"
   },
-  "devDependencies": {
-    "clean-publish": "^4.2.0",
-    "eslint": "8.56.0",
-    "less": "4.2.0",
-    "postcss": "^8.4.33",
-    "source-map": "0.7.4",
-    "strip-color": "^0.1.0",
-    "stylelint": "16.1.0",
-    "tape": "^5.7.3"
-  },
-  "dependencies": {
-    "picocolors": "^1.0.0"
-  },
-  "clean-publish": {
-    "cleanDocs": true
+  "engines": {
+    "node": ">=18"
   }
 }
