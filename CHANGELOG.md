@@ -3,6 +3,10 @@
 ## Unreleased
 
 - Changed: dropped support for Node.js below 18.
+- Fixed: the summary now uses the singular form for a single error or warning
+  (`1 error`, not `1 errors`).
+- Fixed: the README now states that errors are logged by default too, and that
+  they always make the plugin throw.
 - Internal: maintenance taken over by @MoOx.
 - Internal: switched from pnpm to npm.
 - Internal: replaced tape with the Node.js test runner.
