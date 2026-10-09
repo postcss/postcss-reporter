@@ -1,6 +1,10 @@
 # postcss-reporter
 
-A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/postcss/postcss-reporter) ![npm downloads](https://img.shields.io/npm/dm/postcss-reporter)](https://www.npmjs.com/package/postcss-reporter)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/postcss/postcss-reporter/test.yml)](https://github.com/postcss/postcss-reporter/actions)
+[![License](https://img.shields.io/github/license/postcss/postcss-reporter)](https://github.com/postcss/postcss-reporter)
+
+> A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins.
 
 ## Purpose
 
@@ -11,37 +15,40 @@ So this plugin exists to read the accumulated messages (or messages from only th
 
 By default, the messages are formatted for human legibility and sorted according to the line/column positions attached to the messages. But another formatting function can be passed in with an option, and sorting can be turned off with an option.
 
-*By default, only warnings are logged*. If you would like to see more messages, you can change the `filter` function.
+_By default, only warnings and errors are logged_. If you would like to see more messages, you can change the `filter` function.
 
 ## Example Output
 
-![Example](example.png?raw=true)
+![Example](https://raw.githubusercontent.com/postcss/postcss-reporter/main/example.png)
 
-## Installation
+## Install
 
-```shell
+```console
 npm install --save-dev postcss postcss-reporter
 ```
 
-Version 1.0.0+ is compatible with PostCSS 5+. (Earlier versions are compatible with PostCSS 4.)
+Version 7.0.0+ is compatible with PostCSS 8+. (Versions 1.0.0 to 6.x are compatible with PostCSS 5+, earlier versions with PostCSS 4.)
 
 ## Usage
 
-Add it to your plugin list *after any plugins whose messages you want to log*, and optionally pass it an object of options.
+Add it to your plugin list _after any plugins whose messages you want to log_, and optionally pass it an object of options.
 
 For example, using [gulp-postcss](https://github.com/postcss/gulp-postcss):
 
 ```js
-gulp.task('css', function() {
-  return gulp.src('./src/*.css')
-    .pipe(postcss([
-      bemLinter(),
-      customProperties(),
-      calc(),
-      rejectAllColors(),
-      reporter(myOptions) // <------ ding
-    ]))
-    .pipe(gulp.dest('./dist'));
+gulp.task("css", function () {
+  return gulp
+    .src("./src/*.css")
+    .pipe(
+      postcss([
+        bemLinter(),
+        customProperties(),
+        calc(),
+        rejectAllColors(),
+        reporter(myOptions), // <------ ding
+      ]),
+    )
+    .pipe(gulp.dest("./dist"));
 });
 ```
 
@@ -58,17 +65,17 @@ See also `clearAllMessages`.
 By default, this reporter will format the messages for human legibility in the console.
 To use another formatter, pass a function that
 
-  - accepts an object containing a `messages` array and a `source` string
-  - returns the string to report
+- accepts an object containing a `messages` array and a `source` string
+- returns the string to report
 
 For example, you could write a formatter like this:
 
 ```js
 reporter({
-  formatter: function(input) {
-    return input.source + ' produced ' + input.messages.length + ' messages';
-  }
-})
+  formatter: function (input) {
+    return input.source + " produced " + input.messages.length + " messages";
+  },
+});
 ```
 
 **plugins** (array of strings, default = `[]`)
@@ -87,7 +94,7 @@ There are 2 ways to limit output:
 
 Provide a filter function. It receives the message object and returns a truthy or falsy value, indicating whether that particular message should be reported or not.
 
-By default, only messages with `type: "warning"` are logged. (These are the messages produced when the plugin author uses PostCSS's `warn()` function.)
+By default, only messages with `type: "warning"` or `type: "error"` are logged. (Warnings are the messages produced when the plugin author uses PostCSS's `warn()` function.)
 
 For example, `function(message) { return true }` will return every message, regardless of whether or not the plugin declares it as a warning.
 
@@ -100,6 +107,7 @@ See also `clearReportedMessages`.
 **throwError** (boolean, default = `false`)
 
 If `true`, after the plugin logs your messages it will throw an error if it found any warnings.
+An error is always thrown when at least one `error` message is logged, regardless of this option.
 
 **sortByPosition** (boolean, default = `true`)
 
@@ -128,12 +136,12 @@ If you would like no colors in the console output, simply pass `--no-colors` whe
 You can also use this module's formatter as a library, with following API:
 
 ```js
-var formatter = require('postcss-reporter/lib/formatter');
-var myFormatter = formatter(myOptions);
+const formatter = require("postcss-reporter/lib/formatter");
+const myFormatter = formatter(myOptions);
 // to use defaults, just pass no options: `formatter()`
-var warningLog = myFormatter({
+const warningLog = myFormatter({
   messages: someMessages,
-  source: someSource
+  source: someSource,
 });
 console.log(warningLog);
 ```
@@ -143,3 +151,9 @@ These are the formatter's options:
 - sortByPosition (boolean, default = `true`)
 - noIcon (boolean, default = `false`) - Do not print any warning exclamatory triangle icons
 - noPlugin (boolean, default = `false`) - Do not print plugin names
+
+## Contributors
+
+Thanks goes to [these wonderful people](https://github.com/postcss/postcss-reporter/graphs/contributors)
+
+## [License](./LICENSE)
