@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed: `throwError` no longer throws when the logged messages are neither
+  warnings nor errors, as before 7.1.0 (#77).
 - Changed: dropped support for Node.js below 18.
 - Fixed: the summary now uses the singular form for a single error or warning
   (`1 error`, not `1 errors`).
